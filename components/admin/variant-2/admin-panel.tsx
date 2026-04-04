@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -66,7 +66,7 @@ function SectionButton({
 }
 
 export function AdminPanelV2() {
-  const { content, setContent } = useSiteContent()
+  const { content, setContent, saveContent, isLoading, isSaving, isDirty, saveError } = useSiteContent()
   const [activeSection, setActiveSection] = useState<AdminSection>("catalog")
   const [selectedCategoryId, setSelectedCategoryId] = useState(content.categories[1]?.id ?? content.categories[0]?.id ?? "")
   const [selectedProductId, setSelectedProductId] = useState(content.products[0]?.id ?? "")
@@ -90,6 +90,16 @@ export function AdminPanelV2() {
   }, [content.products, search, selectedCategoryId])
 
   const selectedProduct = content.products.find((product) => product.id === selectedProductId) ?? null
+
+  useEffect(() => {
+    if (!selectedCategoryId && categories[0]?.id) {
+      setSelectedCategoryId(categories[0].id)
+    }
+
+    if (!selectedProductId && content.products[0]?.id) {
+      setSelectedProductId(content.products[0].id)
+    }
+  }, [categories, content.products, selectedCategoryId, selectedProductId])
 
   const stats = [
     { label: "Категорий", value: categories.length },
@@ -162,9 +172,28 @@ export function AdminPanelV2() {
     setSelectedProductId(nextProducts[0]?.id ?? "")
   }
 
+  const handleSave = async () => {
+    await saveContent()
+  }
+
   return (
     <div className="min-h-screen bg-[#f6f1ea] text-[#3c3027]">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
+        <div className="mb-6 flex flex-col gap-3 rounded-[1.75rem] border border-[#e0d2bd] bg-[#fcfaf7] p-4 shadow-sm md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-sm font-medium text-[#3c3027]">
+              {isLoading ? "Загружаем данные сайта..." : isDirty ? "Есть несохраненные изменения" : "Все изменения сохранены"}
+            </p>
+            <p className="mt-1 text-sm text-[#8f7c6a]">
+              Контент хранится на сервере. После сохранения обновления сразу доступны на публичном сайте.
+            </p>
+            {saveError ? <p className="mt-2 text-sm text-red-600">{saveError}</p> : null}
+          </div>
+          <Button onClick={handleSave} disabled={isLoading || isSaving || !isDirty} className="bg-[#6B4C9A] hover:bg-[#5e4288]">
+            {isSaving ? "Сохраняем..." : "Сохранить изменения"}
+          </Button>
+        </div>
+
         <div className="grid gap-6 xl:grid-cols-[300px,1fr]">
           <aside className="space-y-6">
             <Card className="border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
@@ -173,7 +202,7 @@ export function AdminPanelV2() {
               </CardHeader>
               <CardContent className="space-y-4 text-sm text-[#766657]">
                 <p>Здесь можно менять категории, товары, бейджи, все основные изображения и тексты секций.</p>
-                <p>Изменения сохраняются в браузере и сразу влияют на публичный сайт.</p>
+                <p>Изменения сохраняются на сервере и после публикации сразу влияют на публичный сайт.</p>
               </CardContent>
             </Card>
 
@@ -334,8 +363,7 @@ export function AdminPanelV2() {
                             </div>
                           </div>
                           <div>
-                            <Label>Изображение товара</Label>
-                            <Input value={selectedProduct.image} onChange={(event) => updateProduct(selectedProduct.id, { image: event.target.value })} className="mt-2 h-12 border-[#e0d2bd] bg-white" />
+                            <ImageField label="Изображение товара" value={selectedProduct.image} onChange={(value) => updateProduct(selectedProduct.id, { image: value })} />
                           </div>
                           <div>
                             <Label>Описание</Label>
@@ -383,7 +411,7 @@ export function AdminPanelV2() {
                   <Field label="Акцент" value={content.hero.titleAccent} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, titleAccent: value } }))} />
                   <Field label="Заголовок после акцента" value={content.hero.titleSuffix} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, titleSuffix: value } }))} />
                   <Field className="md:col-span-2" label="Описание" value={content.hero.description} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, description: value } }))} multiline />
-                  <Field className="md:col-span-2" label="Главное изображение" value={content.hero.image} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, image: value } }))} />
+                  <ImageField className="md:col-span-2" label="Главное изображение" value={content.hero.image} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, image: value } }))} />
                   <Field label="Левая карточка заголовок" value={content.hero.floatingCardLeftTitle} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, floatingCardLeftTitle: value } }))} />
                   <Field label="Левая карточка текст" value={content.hero.floatingCardLeftText} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, floatingCardLeftText: value } }))} />
                   <Field label="Правая карточка заголовок" value={content.hero.floatingCardRightTitle} onChange={(value) => updateContent((current) => ({ ...current, hero: { ...current.hero, floatingCardRightTitle: value } }))} />
@@ -422,7 +450,7 @@ export function AdminPanelV2() {
                       </div>
                     </div>
                   ))}
-                  <Field label="Баннер изображение" value={content.production.bannerImage} onChange={(value) => updateContent((current) => ({ ...current, production: { ...current.production, bannerImage: value } }))} />
+                  <ImageField label="Баннер изображение" value={content.production.bannerImage} onChange={(value) => updateContent((current) => ({ ...current, production: { ...current.production, bannerImage: value } }))} />
                   <Field label="Баннер заголовок" value={content.production.bannerTitle} onChange={(value) => updateContent((current) => ({ ...current, production: { ...current.production, bannerTitle: value } }))} />
                   <Field label="Баннер текст" value={content.production.bannerText} onChange={(value) => updateContent((current) => ({ ...current, production: { ...current.production, bannerText: value } }))} multiline />
                 </CardContent>
@@ -440,7 +468,7 @@ export function AdminPanelV2() {
                   <Field label="Описание" value={content.visit.description} onChange={(value) => updateContent((current) => ({ ...current, visit: { ...current.visit, description: value } }))} multiline />
                   {content.visit.gallery.map((image, index) => (
                     <div key={index} className="grid gap-4 md:grid-cols-2">
-                      <Field label={`Фото ${index + 1}`} value={image.src} onChange={(value) => updateContent((current) => ({ ...current, visit: { ...current.visit, gallery: current.visit.gallery.map((item, itemIndex) => itemIndex === index ? { ...item, src: value } : item) } }))} />
+                      <ImageField label={`Фото ${index + 1}`} value={image.src} onChange={(value) => updateContent((current) => ({ ...current, visit: { ...current.visit, gallery: current.visit.gallery.map((item, itemIndex) => itemIndex === index ? { ...item, src: value } : item) } }))} />
                       <Field label={`Alt ${index + 1}`} value={image.alt} onChange={(value) => updateContent((current) => ({ ...current, visit: { ...current.visit, gallery: current.visit.gallery.map((item, itemIndex) => itemIndex === index ? { ...item, alt: value } : item) } }))} />
                     </div>
                   ))}
@@ -537,7 +565,7 @@ function SectionEditor({
         <Field label="Описание" value={content.description} onChange={(value) => onContentChange({ ...content, description: value })} multiline />
         {content.gallery.map((image, index) => (
           <div key={index} className="grid gap-4 md:grid-cols-2">
-            <Field label={`${imageLabels[index] ?? "Фото"} ссылка`} value={image.src} onChange={(value) => onContentChange({ ...content, gallery: content.gallery.map((item, itemIndex) => itemIndex === index ? { ...item, src: value } : item) })} />
+            <ImageField label={`${imageLabels[index] ?? "Фото"} изображение`} value={image.src} onChange={(value) => onContentChange({ ...content, gallery: content.gallery.map((item, itemIndex) => itemIndex === index ? { ...item, src: value } : item) })} />
             <Field label={`${imageLabels[index] ?? "Фото"} alt`} value={image.alt} onChange={(value) => onContentChange({ ...content, gallery: content.gallery.map((item, itemIndex) => itemIndex === index ? { ...item, alt: value } : item) })} />
           </div>
         ))}
@@ -550,5 +578,84 @@ function SectionEditor({
         ))}
       </CardContent>
     </Card>
+  )
+}
+
+function ImageField({
+  label,
+  value,
+  onChange,
+  className,
+}: {
+  label: string
+  value: string
+  onChange: (value: string) => void
+  className?: string
+}) {
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadError, setUploadError] = useState("")
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (!file) return
+
+    setIsUploading(true)
+    setUploadError("")
+
+    try {
+      const formData = new FormData()
+      formData.append("file", file)
+
+      const response = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      })
+
+      const payload = (await response.json()) as { ok: boolean; url?: string; error?: string }
+
+      if (!response.ok || !payload.ok || !payload.url) {
+        throw new Error(payload.error || "Не удалось загрузить изображение.")
+      }
+
+      onChange(payload.url)
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : "Не удалось загрузить изображение.")
+    } finally {
+      setIsUploading(false)
+      if (inputRef.current) {
+        inputRef.current.value = ""
+      }
+    }
+  }
+
+  return (
+    <div className={className}>
+      <Label>{label}</Label>
+      <div className="mt-2 space-y-3 rounded-2xl border border-[#e0d2bd] bg-white p-3">
+        <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-[#f4ede6]">
+          {value ? (
+            <img src={value} alt={label} className="h-full w-full object-cover" />
+          ) : (
+            <div className="flex h-full items-center justify-center text-sm text-[#9b8a7a]">Изображение не загружено</div>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-3 md:flex-row md:items-center">
+          <button
+            type="button"
+            onClick={() => inputRef.current?.click()}
+            className="inline-flex h-11 items-center justify-center rounded-xl bg-[#6B4C9A] px-4 text-sm font-medium text-white transition-colors hover:bg-[#5e4288]"
+          >
+            {isUploading ? "Загружаем..." : "Загрузить файл"}
+          </button>
+          <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+          <Input value={value} onChange={(event) => onChange(event.target.value)} placeholder="Или вставьте прямую ссылку" className="border-[#e0d2bd] bg-white" />
+        </div>
+
+        {uploadError ? <p className="text-sm text-red-600">{uploadError}</p> : null}
+      </div>
+    </div>
   )
 }
