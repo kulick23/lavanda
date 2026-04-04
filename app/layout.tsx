@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { CartProvider } from '@/components/cart-provider'
 import { Analytics } from '@vercel/analytics/next'
 import { SiteContentProvider } from '@/components/site-content-provider'
+import { VisitBookingProvider } from '@/components/visit-booking-provider'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({ 
@@ -48,7 +49,9 @@ export default function RootLayout({
     <html lang="ru">
       <body className={`${cormorant.variable} ${inter.variable} font-sans antialiased`}>
         <SiteContentProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <VisitBookingProvider>{children}</VisitBookingProvider>
+          </CartProvider>
         </SiteContentProvider>
         <Analytics />
       </body>

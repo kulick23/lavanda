@@ -127,11 +127,11 @@
 
 @layer components {
   .lav-input {
-    @apply h-12 w-full rounded-2xl border border-[#e6def2] bg-white px-4 text-[15px] text-[#2D2A3E] outline-none transition-all placeholder:text-[#9f92b5] focus:border-[#9B6DD4] focus:ring-2 focus:ring-[#9B6DD4]/15;
+    @apply h-12 w-full rounded-xl border border-[#d9cdea] bg-white px-4 text-[15px] font-medium text-[#2D2A3E] outline-none transition-all placeholder:text-[#9f92b5] focus:border-[#8b63c5] focus:ring-2 focus:ring-[#9B6DD4]/15;
   }
 
   .lav-textarea {
-    @apply w-full rounded-2xl border border-[#e6def2] bg-white px-4 py-3 text-[15px] text-[#2D2A3E] outline-none transition-all placeholder:text-[#9f92b5] focus:border-[#9B6DD4] focus:ring-2 focus:ring-[#9B6DD4]/15 resize-none;
+    @apply block w-full rounded-xl border border-[#d9cdea] bg-white px-4 py-3 text-[15px] font-medium leading-6 text-[#2D2A3E] outline-none transition-all placeholder:text-[#9f92b5] focus:border-[#8b63c5] focus:ring-2 focus:ring-[#9B6DD4]/15 resize-none;
   }
 
   .lav-choice {

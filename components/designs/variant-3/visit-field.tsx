@@ -1,11 +1,13 @@
 "use client"
 
 import { useSiteContent } from "@/components/site-content-provider"
+import { useVisitBooking } from "@/components/visit-booking-provider"
 
 export default function VisitField() {
   const {
     content: { visit },
   } = useSiteContent()
+  const { openBooking } = useVisitBooking()
 
   return (
     <section id="visit" className="py-20 bg-white">
@@ -60,17 +62,16 @@ export default function VisitField() {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <a
-                href={visit.ctaLink}
-                target={visit.ctaLink.startsWith("http") ? "_blank" : undefined}
-                rel={visit.ctaLink.startsWith("http") ? "noopener noreferrer" : undefined}
+              <button
+                type="button"
+                onClick={openBooking}
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-3 font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
               >
                 {visit.ctaLabel}
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -84,12 +85,13 @@ export default function VisitField() {
                 <div className="max-w-lg text-white">
                   <h3 className="mb-4 text-2xl font-bold md:text-3xl">{visit.bannerTitle}</h3>
                   <p className="mb-6 leading-relaxed text-white/80">{visit.bannerText}</p>
-                  <a
-                    href="#contact"
+                  <button
+                    type="button"
+                    onClick={openBooking}
                     className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-medium text-[#6B4C9A] transition-all hover:bg-[#F8F4FC]"
                   >
-                    Связаться с нами
-                  </a>
+                    Записаться
+                  </button>
                 </div>
               </div>
             </div>

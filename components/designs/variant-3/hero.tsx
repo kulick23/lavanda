@@ -1,11 +1,13 @@
 "use client"
 
 import { useSiteContent } from "@/components/site-content-provider"
+import { useVisitBooking } from "@/components/visit-booking-provider"
 
 export default function Hero() {
   const {
     content: { hero },
   } = useSiteContent()
+  const { openBooking } = useVisitBooking()
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
@@ -42,8 +44,9 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              <a
-                href="#visit"
+              <button
+                type="button"
+                onClick={openBooking}
                 className="inline-flex items-center gap-2 rounded-2xl border border-[#E8E0F0] bg-white px-6 py-4 font-medium text-[#6B4C9A] transition-all hover:border-[#9B6DD4]"
               >
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -51,7 +54,7 @@ export default function Hero() {
                   <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 Посетить поле
-              </a>
+              </button>
             </div>
 
             <div className="flex gap-8">
