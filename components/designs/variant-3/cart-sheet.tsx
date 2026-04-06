@@ -90,7 +90,7 @@ export default function CartSheet({
           ) : null}
         </button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full border-l-0 bg-[#fcfaf7] p-0 sm:max-w-xl">
+      <SheetContent side="right" className="w-full border-l-0 overflow-hidden bg-[#fcfaf7] p-0 sm:max-w-xl">
         <SheetHeader className="border-b border-[#eadfce] px-6 py-5">
           <SheetTitle className="font-serif text-2xl text-[#3c3027]">Корзина</SheetTitle>
           <SheetDescription className="text-[#8f7c6a]">
@@ -98,8 +98,8 @@ export default function CartSheet({
           </SheetDescription>
         </SheetHeader>
 
-        <div className="flex h-full flex-col">
-          <div className="flex-1 overflow-y-auto px-6 py-5">
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5 pb-10">
             {!items.length && !isSubmitted ? (
               <div className="rounded-3xl border border-dashed border-[#dbc9b4] bg-white p-8 text-center text-[#8f7c6a]">
                 Корзина пока пустая.
