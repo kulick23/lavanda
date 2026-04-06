@@ -4,6 +4,7 @@ import { CartProvider } from '@/components/cart-provider'
 import { Analytics } from '@vercel/analytics/next'
 import { SiteContentProvider } from '@/components/site-content-provider'
 import { VisitBookingProvider } from '@/components/visit-booking-provider'
+import { readSiteContent } from '@/lib/site-content-store'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({ 
@@ -40,15 +41,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const initialContent = await readSiteContent()
+
   return (
     <html lang="ru">
       <body className={`${cormorant.variable} ${inter.variable} font-sans antialiased`}>
-        <SiteContentProvider>
+        <SiteContentProvider initialContent={initialContent}>
           <CartProvider>
             <VisitBookingProvider>{children}</VisitBookingProvider>
           </CartProvider>

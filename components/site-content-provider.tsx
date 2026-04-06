@@ -1,7 +1,6 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState } from "react"
-import { defaultSiteContent } from "@/lib/site-content"
 import type { SiteContent } from "@/lib/types"
 
 const STORAGE_KEY = "lavanda-site-content"
@@ -16,66 +15,24 @@ const SiteContentContext = createContext<{
   saveError: string
 } | null>(null)
 
-export function SiteContentProvider({ children }: { children: React.ReactNode }) {
-  const [content, setContent] = useState<SiteContent>(defaultSiteContent)
-  const [lastSavedSnapshot, setLastSavedSnapshot] = useState(JSON.stringify(defaultSiteContent))
-  const [isLoading, setIsLoading] = useState(true)
+export function SiteContentProvider({
+  children,
+  initialContent,
+}: {
+  children: React.ReactNode
+  initialContent: SiteContent
+}) {
+  const initialSnapshot = JSON.stringify(initialContent)
+  const [content, setContent] = useState<SiteContent>(initialContent)
+  const [lastSavedSnapshot, setLastSavedSnapshot] = useState(initialSnapshot)
+  const [isLoading, setIsLoading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState("")
 
   useEffect(() => {
-    let cancelled = false
-
-    async function loadContent() {
-      try {
-        const response = await fetch("/api/site-content", { cache: "no-store" })
-
-        if (!response.ok) {
-          throw new Error("Failed to load remote content.")
-        }
-
-        const payload = (await response.json()) as { ok: boolean; content?: SiteContent }
-        const nextContent = payload.content ?? defaultSiteContent
-
-        if (!cancelled) {
-          setContent(nextContent)
-          setLastSavedSnapshot(JSON.stringify(nextContent))
-          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(nextContent))
-        }
-      } catch (error) {
-        console.error("Failed to load remote site content", error)
-
-        const saved = window.localStorage.getItem(STORAGE_KEY)
-
-        if (!saved) {
-          if (!cancelled) {
-            setLastSavedSnapshot(JSON.stringify(defaultSiteContent))
-          }
-          return
-        }
-
-        try {
-          const parsed = JSON.parse(saved) as SiteContent
-          if (!cancelled) {
-            setContent(parsed)
-            setLastSavedSnapshot(JSON.stringify(parsed))
-          }
-        } catch (parseError) {
-          console.error("Failed to read saved site content", parseError)
-        }
-      } finally {
-        if (!cancelled) {
-          setIsLoading(false)
-        }
-      }
-    }
-
-    loadContent()
-
-    return () => {
-      cancelled = true
-    }
-  }, [])
+    setContent(initialContent)
+    setLastSavedSnapshot(JSON.stringify(initialContent))
+  }, [initialContent])
 
   useEffect(() => {
     if (isLoading) {
