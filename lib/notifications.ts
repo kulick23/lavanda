@@ -44,7 +44,8 @@ export async function sendTelegramNotification(payload: InquiryPayload) {
   })
 
   if (!response.ok) {
-    throw new Error("Failed to send Telegram notification.")
+    const payload = (await response.json().catch(() => null)) as { description?: string } | null
+    throw new Error(payload?.description || "Failed to send Telegram notification.")
   }
 
   return {

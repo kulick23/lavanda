@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useMemo, useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import { TelegramIcon, ViberIcon } from "@/components/brand-icons"
 
 interface VisitBookingContextValue {
@@ -68,13 +68,13 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
       })
 
       if (!response.ok) {
-        throw new Error("Failed to submit visit request.")
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(payload?.error || "Не удалось отправить заявку.")
       }
 
       setIsSubmitted(true)
     } catch (error) {
-      console.error(error)
-      setSubmitError("Не удалось отправить заявку. Попробуйте еще раз.")
+      setSubmitError(error instanceof Error ? error.message : "Не удалось отправить заявку. Попробуйте еще раз.")
     } finally {
       setIsSubmitting(false)
     }
@@ -85,6 +85,10 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
       {children}
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="max-w-[min(92vw,620px)] rounded-[2rem] border-0 bg-[#fcfaf7] p-0 shadow-[0_24px_80px_-40px_rgba(73,45,112,0.55)]">
+          <DialogTitle className="sr-only">Заявка на посещение поля</DialogTitle>
+          <DialogDescription className="sr-only">
+            Форма для отправки контактных данных и пожеланий по визиту на лавандовое поле.
+          </DialogDescription>
           {!isSubmitted ? (
             <div className="overflow-hidden rounded-[2rem]">
               <div className="border-b border-[#efe5f6] bg-gradient-to-r from-[#f7f0fd] via-[#fcfaf7] to-[#f3ebfb] px-6 py-6 sm:px-8">
