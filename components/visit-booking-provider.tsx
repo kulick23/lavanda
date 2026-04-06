@@ -84,18 +84,18 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
     <VisitBookingContext.Provider value={value}>
       {children}
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-w-[min(92vw,620px)] rounded-[2rem] border-0 bg-[#fcfaf7] p-0 shadow-[0_24px_80px_-40px_rgba(73,45,112,0.55)]">
+        <DialogContent className="max-h-[92vh] max-w-[min(94vw,620px)] overflow-y-auto rounded-[1.75rem] border-0 bg-[#fcfaf7] p-0 shadow-[0_24px_80px_-40px_rgba(73,45,112,0.55)] sm:rounded-[2rem]">
           <DialogTitle className="sr-only">Заявка на посещение поля</DialogTitle>
           <DialogDescription className="sr-only">
             Форма для отправки контактных данных и пожеланий по визиту на лавандовое поле.
           </DialogDescription>
           {!isSubmitted ? (
-            <div className="overflow-hidden rounded-[2rem]">
-              <div className="border-b border-[#efe5f6] bg-gradient-to-r from-[#f7f0fd] via-[#fcfaf7] to-[#f3ebfb] px-6 py-6 sm:px-8">
+            <div className="overflow-hidden rounded-[1.75rem] sm:rounded-[2rem]">
+              <div className="border-b border-[#efe5f6] bg-gradient-to-r from-[#f7f0fd] via-[#fcfaf7] to-[#f3ebfb] px-5 py-5 sm:px-8 sm:py-6">
                 <span className="inline-flex rounded-full border border-white/80 bg-white/90 px-4 py-1.5 text-sm font-medium text-[#6B4C9A] shadow-sm">
                   Посещение поля
                 </span>
-                <h3 className="mt-5 font-serif text-[2rem] leading-none text-[#2D2A3E] sm:text-[2.3rem]">
+                <h3 className="mt-4 font-serif text-[1.85rem] leading-[0.95] text-[#2D2A3E] sm:mt-5 sm:text-[2.3rem]">
                   Оставьте заявку на визит
                 </h3>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#6B5A7B] sm:text-[15px]">
@@ -103,7 +103,7 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5 px-6 py-6 sm:px-8 sm:py-8">
+              <form onSubmit={handleSubmit} className="space-y-5 px-5 py-5 sm:px-8 sm:py-8">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="mb-2 block text-sm font-medium text-[#2D2A3E]">Ваше имя</label>
@@ -129,7 +129,7 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
 
                 <div>
                   <label className="mb-3 block text-sm font-medium text-[#2D2A3E]">Где удобнее связаться?</label>
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid gap-3">
                     <label
                       className={`lav-choice cursor-pointer ${
                         formData.messenger === "telegram"
@@ -185,7 +185,7 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex h-12 w-full items-center justify-center rounded-full bg-[#6B4C9A] px-6 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#9B6DD4]/20 disabled:cursor-not-allowed disabled:opacity-45"
+                  className="inline-flex h-13 w-full items-center justify-center rounded-full bg-[#6B4C9A] px-6 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#9B6DD4]/20 disabled:cursor-not-allowed disabled:opacity-45"
                 >
                   {isSubmitting ? "Отправляем..." : "Отправить заявку"}
                 </button>

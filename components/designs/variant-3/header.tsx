@@ -42,18 +42,18 @@ export default function Header() {
       isScrolled ? "bg-white/95 backdrop-blur-xl shadow-sm" : "bg-transparent"
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex h-16 items-center justify-between gap-3 md:h-20">
           {/* Logo */}
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2"
+            className="flex min-w-0 items-center gap-2"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#9B6DD4] to-[#6B4C9A] flex items-center justify-center">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#9B6DD4] to-[#6B4C9A]">
               <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 3v18M12 3c-2 4-5 6-5 10a5 5 0 0010 0c0-4-3-6-5-10z" />
               </svg>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">
+            <span className="truncate bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-lg font-bold text-transparent sm:text-xl">
               {settings.brandName}
             </span>
           </button>
@@ -91,25 +91,28 @@ export default function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-10 h-10 rounded-xl bg-[#F8F4FC] flex items-center justify-center text-[#6B4C9A]"
-          >
-            {isMobileMenuOpen ? (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <CartSheet triggerClassName="h-10 w-10 rounded-xl px-0" />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F8F4FC] text-[#6B4C9A]"
+            >
+              {isMobileMenuOpen ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-[#F0E8F5] bg-white">
+          <div className="lg:hidden border-t border-[#F0E8F5] bg-white py-4">
             <nav className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <button
@@ -121,13 +124,12 @@ export default function Header() {
                 </button>
               ))}
             </nav>
-            <div className="flex gap-3 mt-4 pt-4 border-t border-[#F0E8F5] px-4">
-              <CartSheet triggerClassName="gap-2 px-4 text-sm" showLabel />
-              <a href={settings.telegram.href} className="flex items-center gap-2 px-4 py-2 bg-[#F8F4FC] rounded-xl text-[#6B4C9A] text-sm">
+            <div className="mt-4 grid gap-3 border-t border-[#F0E8F5] px-4 pt-4 sm:grid-cols-2">
+              <a href={settings.telegram.href} className="flex items-center justify-center gap-2 rounded-xl bg-[#F8F4FC] px-4 py-3 text-sm text-[#6B4C9A]">
                 <TelegramIcon className="h-4 w-4" />
                 Telegram
               </a>
-              <a href={settings.viber.href} className="flex items-center gap-2 px-4 py-2 bg-[#F8F4FC] rounded-xl text-[#6B4C9A] text-sm">
+              <a href={settings.viber.href} className="flex items-center justify-center gap-2 rounded-xl bg-[#F8F4FC] px-4 py-3 text-sm text-[#6B4C9A]">
                 <ViberIcon className="h-4 w-4" />
                 Viber
               </a>

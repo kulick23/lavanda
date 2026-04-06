@@ -22,14 +22,14 @@ export default function OrderModal({ product, onClose }: OrderModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#2D2A3E]/50 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-[#2D2A3E]/50 p-0 backdrop-blur-sm sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg overflow-hidden rounded-[2rem] bg-white shadow-2xl"
+        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-[2rem] bg-white shadow-2xl sm:rounded-[2rem]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative border-b border-[#F0E8F5] p-6">
+        <div className="sticky top-0 z-10 border-b border-[#F0E8F5] bg-white p-5 sm:p-6">
           <button
             onClick={onClose}
             className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#F8F4FC] text-[#6B4C9A] transition-colors hover:bg-[#EDE5F5]"
@@ -38,13 +38,13 @@ export default function OrderModal({ product, onClose }: OrderModalProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <h3 className="text-xl font-bold text-[#2D2A3E]">Товар</h3>
+          <h3 className="pr-10 text-lg font-bold text-[#2D2A3E] sm:text-xl">Товар</h3>
         </div>
 
-        <div className="grid gap-4 bg-[#F8F4FC] p-6 sm:grid-cols-[112px,1fr] sm:items-center">
-          <img src={product.image} alt={product.name} className="h-28 w-full rounded-[1.5rem] object-cover sm:h-28 sm:w-28" />
+        <div className="grid gap-4 bg-[#F8F4FC] p-5 sm:grid-cols-[112px,1fr] sm:items-center sm:p-6">
+          <img src={product.image} alt={product.name} className="h-44 w-full rounded-[1.5rem] object-cover sm:h-28 sm:w-28" />
           <div>
-            <h4 className="text-xl font-semibold text-[#2D2A3E]">{product.name}</h4>
+            <h4 className="text-xl font-semibold leading-tight text-[#2D2A3E]">{product.name}</h4>
             <p className="text-lg font-bold bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">
               {product.price} BYN
             </p>
@@ -52,26 +52,28 @@ export default function OrderModal({ product, onClose }: OrderModalProps) {
           </div>
         </div>
 
-        <div className="space-y-5 p-6">
-          <div className="flex items-center justify-between rounded-2xl bg-[#F8F4FC] p-4">
+        <div className="space-y-4 p-5 sm:space-y-5 sm:p-6">
+          <div className="rounded-2xl bg-[#F8F4FC] p-4">
             <div>
               <p className="text-sm text-[#6B5A7B]">Количество</p>
               <p className="mt-1 text-sm text-[#2D2A3E]">Выберите, сколько добавить в корзину</p>
             </div>
-            <div className="flex items-center gap-2 rounded-2xl bg-white p-1">
-              <button
-                onClick={() => setQuantity((current) => Math.max(1, current - 1))}
-                className="flex h-9 w-9 items-center justify-center rounded-xl text-[#6B4C9A]"
-              >
-                <span className="text-lg leading-none">-</span>
-              </button>
-              <span className="min-w-8 text-center font-medium text-[#2D2A3E]">{quantity}</span>
-              <button
-                onClick={() => setQuantity((current) => current + 1)}
-                className="flex h-9 w-9 items-center justify-center rounded-xl text-[#6B4C9A]"
-              >
-                <span className="text-lg leading-none">+</span>
-              </button>
+            <div className="mt-4 flex justify-center sm:justify-end">
+              <div className="flex items-center gap-2 rounded-2xl bg-white p-1 shadow-sm">
+                <button
+                  onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-[#6B4C9A]"
+                >
+                  <span className="text-lg leading-none">-</span>
+                </button>
+                <span className="min-w-10 text-center font-medium text-[#2D2A3E]">{quantity}</span>
+                <button
+                  onClick={() => setQuantity((current) => current + 1)}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-[#6B4C9A]"
+                >
+                  <span className="text-lg leading-none">+</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -84,7 +86,7 @@ export default function OrderModal({ product, onClose }: OrderModalProps) {
 
           <button
             onClick={handleAddToCart}
-            className="flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] font-semibold text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
+            className="flex h-13 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] font-semibold text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
           >
             {isAdded ? (
               <>
@@ -96,7 +98,7 @@ export default function OrderModal({ product, onClose }: OrderModalProps) {
             )}
           </button>
 
-          <p className="text-center text-sm text-[#6B5A7B]">
+          <p className="pb-2 text-center text-sm text-[#6B5A7B] sm:pb-0">
             Заказ оформляется позже из корзины.
           </p>
         </div>

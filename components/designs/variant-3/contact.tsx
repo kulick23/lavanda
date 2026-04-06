@@ -59,10 +59,10 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="bg-white py-16 sm:py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="mb-12 text-center">
             <span className="inline-block px-4 py-1.5 bg-[#F8F4FC] text-[#6B4C9A] text-sm font-medium rounded-full mb-4">
               Контакты
             </span>
@@ -74,13 +74,13 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="grid items-start gap-8 md:grid-cols-5">
+          <div className="grid items-start gap-6 md:grid-cols-5 md:gap-8">
             <div className="space-y-4 md:col-span-2">
               <a
                 href={settings.telegram.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex min-h-24 items-center gap-4 rounded-[1.75rem] bg-[#F8F4FC] p-5 hover:shadow-lg transition-all"
+                className="group flex min-h-24 items-center gap-4 rounded-[1.5rem] bg-[#F8F4FC] p-4 hover:shadow-lg transition-all sm:rounded-[1.75rem] sm:p-5"
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm transition-all group-hover:bg-gradient-to-r group-hover:from-[#9B6DD4] group-hover:to-[#6B4C9A]">
                   <TelegramIcon className="h-6 w-6 text-[#6B4C9A] group-hover:text-white" />
@@ -93,7 +93,7 @@ export default function Contact() {
 
               <a
                 href={settings.viber.href}
-                className="group flex min-h-24 items-center gap-4 rounded-[1.75rem] bg-[#F8F4FC] p-5 hover:shadow-lg transition-all"
+                className="group flex min-h-24 items-center gap-4 rounded-[1.5rem] bg-[#F8F4FC] p-4 hover:shadow-lg transition-all sm:rounded-[1.75rem] sm:p-5"
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm transition-all group-hover:bg-gradient-to-r group-hover:from-[#9B6DD4] group-hover:to-[#6B4C9A]">
                   <ViberIcon className="h-6 w-6 text-[#6B4C9A] group-hover:text-white" />
@@ -108,7 +108,7 @@ export default function Contact() {
                 href={settings.instagram.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-24 items-center gap-4 rounded-[1.75rem] bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] p-5 text-white hover:shadow-xl transition-all"
+                className="flex min-h-24 items-center gap-4 rounded-[1.5rem] bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] p-4 text-white hover:shadow-xl transition-all sm:rounded-[1.75rem] sm:p-5"
               >
                 <InstagramIcon className="h-7 w-7 shrink-0" />
                 <div className="min-w-0">
@@ -117,7 +117,7 @@ export default function Contact() {
                 </div>
               </a>
 
-              <div className="rounded-[1.75rem] border border-[#E8E0F0] p-5">
+              <div className="rounded-[1.5rem] border border-[#E8E0F0] p-5 sm:rounded-[1.75rem]">
                 <p className="text-sm text-[#6B5A7B]">Телефон</p>
                 <p className="mt-1 font-semibold text-[#2D2A3E]">{settings.phone}</p>
                 <p className="mt-4 text-sm text-[#6B5A7B]">Часы работы</p>
@@ -127,7 +127,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="md:col-span-3 rounded-[2rem] bg-[#F8F4FC] p-6 md:p-8">
+            <div className="rounded-[1.75rem] bg-[#F8F4FC] p-5 sm:p-6 md:col-span-3 md:rounded-[2rem] md:p-8">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -157,7 +157,7 @@ export default function Contact() {
 
                   <div>
                     <label className="block text-sm font-medium text-[#2D2A3E] mb-3">Удобный мессенджер</label>
-                    <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="grid gap-3">
                       {(["telegram", "viber"] as Messenger[]).map((messenger) => (
                         <label
                           key={messenger}
@@ -175,7 +175,10 @@ export default function Contact() {
                             checked={formData.messenger === messenger}
                             onChange={() => setFormData({ ...formData, messenger })}
                           />
-                          {messenger === "telegram" ? "Telegram" : "Viber"}
+                          <span className="inline-flex items-center gap-2">
+                            {messenger === "telegram" ? <TelegramIcon className="h-4 w-4" /> : <ViberIcon className="h-4 w-4" />}
+                            {messenger === "telegram" ? "Telegram" : "Viber"}
+                          </span>
                         </label>
                       ))}
                     </div>

@@ -6,10 +6,10 @@ export default function Purchase() {
     content: { purchaseOptions },
   } = useSiteContent()
   return (
-    <section id="purchase" className="py-20 bg-[#F8F4FC]">
+    <section id="purchase" className="bg-[#F8F4FC] py-16 sm:py-20">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="mb-12 text-center">
           <span className="inline-block px-4 py-1.5 bg-white text-[#6B4C9A] text-sm font-medium rounded-full mb-4">
             Как приобрести
           </span>
@@ -19,13 +19,13 @@ export default function Purchase() {
               купить
             </span>
           </h2>
-          <p className="text-lg text-[#6B5A7B] max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-base text-[#6B5A7B] sm:text-lg">
             Выберите удобный способ получения нашей продукции
           </p>
         </div>
 
         {/* Purchase Options */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="mx-auto grid max-w-4xl gap-4 sm:gap-6 md:grid-cols-3">
           {purchaseOptions.map((option, index) => (
             <div 
               key={index}
@@ -82,8 +82,8 @@ export default function Purchase() {
         </div>
 
         {/* Additional Info */}
-        <div className="mt-12 bg-white rounded-3xl p-6 md:p-8 max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6 text-center">
+        <div className="mx-auto mt-10 max-w-4xl rounded-3xl bg-white p-6 md:p-8">
+          <div className="grid gap-6 text-center sm:grid-cols-3">
             <div>
               <div className="w-12 h-12 mx-auto mb-3 bg-green-100 rounded-xl flex items-center justify-center">
                 <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -91,15 +91,15 @@ export default function CartSheet({
         </button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full border-l-0 overflow-hidden bg-[#fcfaf7] p-0 sm:max-w-xl">
-        <SheetHeader className="border-b border-[#eadfce] px-6 py-5">
-          <SheetTitle className="font-serif text-2xl text-[#3c3027]">Корзина</SheetTitle>
+        <SheetHeader className="border-b border-[#eadfce] px-5 py-4 sm:px-6 sm:py-5">
+          <SheetTitle className="font-serif text-xl text-[#3c3027] sm:text-2xl">Корзина</SheetTitle>
           <SheetDescription className="text-[#8f7c6a]">
             Сначала добавьте товары сюда, затем оформите заявку.
           </SheetDescription>
         </SheetHeader>
 
         <div className="flex min-h-0 flex-1 flex-col">
-          <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5 pb-10">
+          <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 pb-8 sm:px-6 sm:py-5 sm:pb-10">
             {!items.length && !isSubmitted ? (
               <div className="rounded-3xl border border-dashed border-[#dbc9b4] bg-white p-8 text-center text-[#8f7c6a]">
                 Корзина пока пустая.
@@ -110,27 +110,27 @@ export default function CartSheet({
               <div className="space-y-4">
                 {items.map((item) => (
                   <div key={item.product.id} className="rounded-3xl bg-white p-4 shadow-sm">
-                    <div className="flex gap-4">
+                    <div className="flex gap-3 sm:gap-4">
                       <img
                         src={item.product.image}
                         alt={item.product.name}
-                        className="h-24 w-24 rounded-2xl object-cover"
+                        className="h-20 w-20 rounded-2xl object-cover sm:h-24 sm:w-24"
                       />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start justify-between gap-3">
                           <div>
-                            <h3 className="text-base font-semibold text-[#2D2A3E]">{item.product.name}</h3>
+                            <h3 className="text-sm font-semibold text-[#2D2A3E] sm:text-base">{item.product.name}</h3>
                             <p className="mt-1 text-sm text-[#6B5A7B]">{item.product.price} BYN / шт</p>
                           </div>
                           <button onClick={() => removeItem(item.product.id)} className="text-[#9B6DD4]">
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
-                        <div className="mt-4 flex items-center justify-between">
+                        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                           <div className="flex items-center gap-2 rounded-2xl bg-[#F8F4FC] p-1">
                             <button
                               onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                              className="flex h-8 w-8 items-center justify-center rounded-xl text-[#6B4C9A]"
+                              className="flex h-9 w-9 items-center justify-center rounded-xl text-[#6B4C9A]"
                             >
                               <Minus className="h-4 w-4" />
                             </button>
@@ -139,12 +139,12 @@ export default function CartSheet({
                             </span>
                             <button
                               onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                              className="flex h-8 w-8 items-center justify-center rounded-xl text-[#6B4C9A]"
+                              className="flex h-9 w-9 items-center justify-center rounded-xl text-[#6B4C9A]"
                             >
                               <Plus className="h-4 w-4" />
                             </button>
                           </div>
-                          <span className="font-semibold text-[#8b9a7d]">
+                          <span className="text-right font-semibold text-[#8b9a7d] sm:text-left">
                             {item.product.price * item.quantity} BYN
                           </span>
                         </div>
@@ -156,7 +156,7 @@ export default function CartSheet({
             ) : null}
 
             {items.length && !isSubmitted ? (
-              <form onSubmit={handleSubmit} className="mt-6 space-y-4 rounded-[2rem] bg-white p-5 shadow-sm">
+              <form onSubmit={handleSubmit} className="mt-5 space-y-4 rounded-[2rem] bg-white p-4 shadow-sm sm:mt-6 sm:p-5">
                 <div className="flex items-center justify-between border-b border-[#F0E8F5] pb-4">
                   <span className="text-sm text-[#6B5A7B]">Итого</span>
                   <span className="text-xl font-semibold text-[#2D2A3E]">{totalPrice} BYN</span>
@@ -187,7 +187,7 @@ export default function CartSheet({
 
                 <div>
                   <label className="mb-3 block text-sm font-medium text-[#2D2A3E]">Где удобнее связаться?</label>
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid gap-3">
                     <label className={`lav-choice cursor-pointer ${formData.messenger === "telegram" ? "border-[#9B6DD4] bg-[#F8F4FC] text-[#6B4C9A]" : "border-[#E8E0F0] text-[#6B5A7B]"}`}>
                       <input
                         type="radio"
@@ -229,7 +229,7 @@ export default function CartSheet({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] font-semibold text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
+                  className="flex h-13 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] font-semibold text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
                 >
                   {isSubmitting ? "Отправляем..." : "Оформить заказ"}
                 </button>
@@ -238,7 +238,7 @@ export default function CartSheet({
             ) : null}
 
             {isSubmitted ? (
-              <div className="mt-6 rounded-[2rem] bg-white p-8 text-center shadow-sm">
+              <div className="mt-6 rounded-[2rem] bg-white p-6 text-center shadow-sm sm:p-8">
                 <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A]">
                   <svg className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

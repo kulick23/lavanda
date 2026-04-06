@@ -19,7 +19,7 @@ export default function Catalog() {
     : products.filter(p => p.category === activeCategory)
 
   return (
-    <section id="catalog" className="py-20 bg-white">
+    <section id="catalog" className="bg-white py-16 sm:py-20">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -35,25 +35,27 @@ export default function Catalog() {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2 ${
-                activeCategory === cat.id
-                  ? "bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] text-white shadow-lg shadow-[#9B6DD4]/25"
-                  : "bg-[#F8F4FC] text-[#6B5A7B] hover:bg-[#EDE5F5]"
-              }`}
-            >
-              <span>{cat.icon}</span>
-              {cat.label}
-            </button>
-          ))}
+        <div className="mb-10 -mx-4 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex w-max gap-2 sm:w-auto sm:flex-wrap sm:justify-center">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all sm:px-5 ${
+                  activeCategory === cat.id
+                    ? "bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] text-white shadow-lg shadow-[#9B6DD4]/25"
+                    : "bg-[#F8F4FC] text-[#6B5A7B] hover:bg-[#EDE5F5]"
+                }`}
+              >
+                <span>{cat.icon}</span>
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Products Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => (
             <div 
               key={product.id}
@@ -84,27 +86,27 @@ export default function Catalog() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-1 flex-col p-5">
+              <div className="flex flex-1 flex-col p-4 sm:p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <span className="text-xs text-[#9B6DD4] font-medium">
                       {categories.find(c => c.id === product.category)?.label}
                     </span>
-                    <h3 className="mt-1 text-lg font-semibold text-[#2D2A3E]">
+                    <h3 className="mt-1 text-base font-semibold text-[#2D2A3E] sm:text-lg">
                       {product.name}
                     </h3>
                     <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#6B5A7B]">
                       {product.description}
                     </p>
                   </div>
-                  <span className="shrink-0 text-xl font-bold bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">
+                  <span className="shrink-0 bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-lg font-bold text-transparent sm:text-xl">
                     {product.price} BYN
                   </span>
                 </div>
                 
                 <button 
                   onClick={() => addItem(product)}
-                  className="mt-auto flex h-12 w-full items-center justify-center rounded-2xl bg-[#F8F4FC] text-[#6B4C9A] font-medium transition-all hover:bg-gradient-to-r hover:from-[#9B6DD4] hover:to-[#6B4C9A] hover:text-white"
+                  className="mt-5 flex h-12 w-full items-center justify-center rounded-2xl bg-[#F8F4FC] font-medium text-[#6B4C9A] transition-all hover:bg-gradient-to-r hover:from-[#9B6DD4] hover:to-[#6B4C9A] hover:text-white"
                 >
                   В корзину
                 </button>
