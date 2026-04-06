@@ -294,37 +294,96 @@ export function AdminPanelV2() {
                       Добавить товар
                     </Button>
                   </CardHeader>
-                  <CardContent className="grid gap-6 lg:grid-cols-[320px,1fr]">
+                  <CardContent className="grid gap-6 lg:grid-cols-[360px,1fr]">
                     <div className="space-y-4">
+                      <div className="rounded-3xl border border-[#eadfce] bg-white p-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9b8a7a]">Текущая категория</p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {categories.map((category) => (
+                            <button
+                              key={category.id}
+                              type="button"
+                              onClick={() => setSelectedCategoryId(category.id)}
+                              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                                selectedCategoryId === category.id
+                                  ? "bg-[#8b9a7d] text-white shadow-sm"
+                                  : "bg-[#f4ede6] text-[#6f6254] hover:bg-[#eadfce]"
+                              }`}
+                            >
+                              <span>{category.icon}</span>
+                              {category.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
                       <Input
                         value={search}
                         onChange={(event) => setSearch(event.target.value)}
-                        placeholder="Поиск по товарам"
+                        placeholder="Поиск внутри категории"
                         className="h-12 border-[#e0d2bd] bg-white"
                       />
-                      <div className="space-y-3">
-                        {filteredProducts.map((product) => (
-                          <button
-                            key={product.id}
-                            onClick={() => setSelectedProductId(product.id)}
-                            className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition-all ${
-                              selectedProductId === product.id ? "border-[#8b9a7d] bg-[#f2ece2]" : "border-[#ede1d0] bg-white hover:border-[#d8c8b1]"
-                            }`}
-                          >
-                            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-[#f2ece2]">
-                              {product.image ? <img src={product.image} alt={product.name} className="h-full w-full object-cover" /> : null}
+                      <div className="rounded-3xl border border-[#eadfce] bg-white p-4">
+                        <div className="mb-4 flex items-center justify-between gap-3">
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9b8a7a]">Ассортимент категории</p>
+                            <p className="mt-1 text-sm text-[#8f7c6a]">
+                              {categories.find((category) => category.id === selectedCategoryId)?.label ?? "Категория не выбрана"}
+                            </p>
+                          </div>
+                          <span className="rounded-full bg-[#f4ede6] px-3 py-1 text-xs font-medium text-[#6f6254]">
+                            {filteredProducts.length} шт
+                          </span>
+                        </div>
+
+                        <div className="space-y-3">
+                          {filteredProducts.length > 0 ? (
+                            filteredProducts.map((product) => (
+                              <div
+                                key={product.id}
+                                className={`rounded-2xl border p-3 transition-all ${
+                                  selectedProductId === product.id ? "border-[#8b9a7d] bg-[#f2ece2]" : "border-[#ede1d0] bg-[#fcfaf7]"
+                                }`}
+                              >
+                                <div className="flex items-start gap-3">
+                                  <button
+                                    type="button"
+                                    onClick={() => setSelectedProductId(product.id)}
+                                    className="flex min-w-0 flex-1 items-start gap-3 text-left"
+                                  >
+                                    <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-[#f2ece2]">
+                                      {product.image ? <img src={product.image} alt={product.name} className="h-full w-full object-cover" /> : null}
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                      <div className="flex items-start justify-between gap-3">
+                                        <p className="truncate font-medium text-[#3c3027]">{product.name || "Новый товар"}</p>
+                                        <span className="shrink-0 text-sm font-semibold text-[#8b9a7d]">{product.price} BYN</span>
+                                      </div>
+                                      <p className="mt-1 line-clamp-2 text-sm text-[#8f7c6a]">{product.description || "Без описания"}</p>
+                                    </div>
+                                  </button>
+                                  <div className="flex flex-col gap-2">
+                                    <Button variant="outline" size="sm" onClick={() => setSelectedProductId(product.id)}>
+                                      Изменить
+                                    </Button>
+                                    <Button variant="outline" size="sm" onClick={() => deleteProduct(product.id)}>
+                                      Удалить
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="rounded-2xl border border-dashed border-[#dccdb8] bg-[#fcfaf7] px-4 py-6 text-sm text-[#8f7c6a]">
+                              В этой категории пока нет товаров. Нажми `Добавить товар`, чтобы создать первый.
                             </div>
-                            <div className="min-w-0 flex-1">
-                              <p className="truncate font-medium text-[#3c3027]">{product.name || "Новый товар"}</p>
-                              <p className="truncate text-sm text-[#8f7c6a]">{product.description || "Без описания"}</p>
-                            </div>
-                          </button>
-                        ))}
+                          )}
+                        </div>
                       </div>
                     </div>
 
                     {selectedProduct ? (
-                      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr),320px]">
+                      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr),280px]">
                         <div className="space-y-4">
                           <div className="flex items-center justify-between gap-4">
                             <h3 className="font-serif text-2xl">Редактор товара</h3>
@@ -381,17 +440,28 @@ export function AdminPanelV2() {
                           </div>
                         </div>
 
-                        <div className="space-y-4 rounded-3xl border border-[#e7d9c5] bg-white p-4">
-                          <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-[#f2ece2]">
-                            {selectedProduct.image ? <img src={selectedProduct.image} alt={selectedProduct.name} className="h-full w-full object-cover" /> : null}
+                        <div className="space-y-4 rounded-3xl border border-[#e7d9c5] bg-white p-4 lg:sticky lg:top-24">
+                          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9b8a7a]">Как выглядит карточка</p>
+                          <div className="rounded-2xl border border-[#eee4d7] bg-[#fcfaf7] p-3">
+                            <div className="flex items-start gap-3">
+                              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-[#f2ece2]">
+                                {selectedProduct.image ? <img src={selectedProduct.image} alt={selectedProduct.name} className="h-full w-full object-cover" /> : null}
+                              </div>
+                              <div className="min-w-0 flex-1 space-y-2">
+                                <div className="flex items-start justify-between gap-2">
+                                  <Badge variant="outline" className="max-w-full truncate">
+                                    {categories.find((category) => category.id === selectedProduct.category)?.label ?? "Без категории"}
+                                  </Badge>
+                                  <span className="shrink-0 font-semibold text-[#8b9a7d]">{selectedProduct.price} BYN</span>
+                                </div>
+                                <h4 className="line-clamp-2 font-serif text-xl leading-tight">{selectedProduct.name || "Новый товар"}</h4>
+                                <p className="line-clamp-3 text-sm leading-relaxed text-[#766657]">
+                                  {selectedProduct.description || "Описание товара появится здесь."}
+                                </p>
+                              </div>
+                            </div>
+                            {selectedProduct.badge ? <Badge className={`mt-3 ${selectedProduct.badgeColor}`}>{selectedProduct.badge}</Badge> : null}
                           </div>
-                          <div className="flex items-center justify-between gap-3">
-                            <Badge variant="outline">{categories.find((category) => category.id === selectedProduct.category)?.label ?? "Без категории"}</Badge>
-                            <span className="font-semibold text-[#8b9a7d]">{selectedProduct.price} BYN</span>
-                          </div>
-                          <h4 className="font-serif text-2xl">{selectedProduct.name || "Новый товар"}</h4>
-                          <p className="text-sm leading-relaxed text-[#766657]">{selectedProduct.description || "Описание товара появится здесь."}</p>
-                          {selectedProduct.badge ? <Badge className={selectedProduct.badgeColor}>{selectedProduct.badge}</Badge> : null}
                         </div>
                       </div>
                     ) : null}
@@ -633,27 +703,37 @@ function ImageField({
   return (
     <div className={className}>
       <Label>{label}</Label>
-      <div className="mt-2 space-y-3 rounded-2xl border border-[#e0d2bd] bg-white p-3">
-        <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-[#f4ede6]">
-          {value ? (
-            <img src={value} alt={label} className="h-full w-full object-cover" />
-          ) : (
-            <div className="flex h-full items-center justify-center text-sm text-[#9b8a7a]">Изображение не загружено</div>
-          )}
-        </div>
+      <div className="mt-2 rounded-2xl border border-[#e0d2bd] bg-white p-3">
+        <div className="flex gap-3">
+          <div className="h-24 w-24 shrink-0 overflow-hidden rounded-2xl border border-[#efe4d8] bg-[#f4ede6]">
+            {value ? (
+              <img src={value} alt={label} className="h-full w-full object-cover" />
+            ) : (
+              <div className="flex h-full items-center justify-center px-2 text-center text-xs text-[#9b8a7a]">Нет фото</div>
+            )}
+          </div>
 
-        <div className="flex flex-col gap-3 md:flex-row md:items-center">
-          <button
-            type="button"
-            onClick={() => inputRef.current?.click()}
-            className="inline-flex h-11 items-center justify-center rounded-xl bg-[#6B4C9A] px-4 text-sm font-medium text-white transition-colors hover:bg-[#5e4288]"
-          >
-            {isUploading ? "Загружаем..." : "Загрузить файл"}
-          </button>
-          <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
-          <Input value={value} onChange={(event) => onChange(event.target.value)} placeholder="Или вставьте прямую ссылку" className="border-[#e0d2bd] bg-white" />
-        </div>
+          <div className="min-w-0 flex-1 space-y-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="button"
+                onClick={() => inputRef.current?.click()}
+                className="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#6B4C9A] px-4 text-sm font-medium text-white transition-colors hover:bg-[#5e4288]"
+              >
+                {isUploading ? "Загружаем..." : "Загрузить файл"}
+              </button>
+              <p className="text-sm text-[#8f7c6a]">Или вставь ссылку вручную</p>
+              <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+            </div>
 
+            <Input
+              value={value}
+              onChange={(event) => onChange(event.target.value)}
+              placeholder="https://..."
+              className="border-[#e0d2bd] bg-white"
+            />
+          </div>
+        </div>
         {uploadError ? <p className="text-sm text-red-600">{uploadError}</p> : null}
       </div>
     </div>
