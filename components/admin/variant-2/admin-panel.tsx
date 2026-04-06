@@ -179,7 +179,7 @@ export function AdminPanelV2() {
   return (
     <div className="min-h-screen bg-[#f6f1ea] text-[#3c3027]">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
-        <div className="mb-6 flex flex-col gap-3 rounded-[1.75rem] border border-[#e0d2bd] bg-[#fcfaf7] p-4 shadow-sm md:flex-row md:items-center md:justify-between">
+        <div className="mb-4 flex flex-col gap-3 rounded-[1.5rem] border border-[#e0d2bd] bg-[#fcfaf7] p-4 shadow-sm md:mb-6 md:flex-row md:items-center md:justify-between md:rounded-[1.75rem]">
           <div>
             <p className="text-sm font-medium text-[#3c3027]">
               {isLoading ? "Загружаем данные сайта..." : isDirty ? "Есть несохраненные изменения" : "Все изменения сохранены"}
@@ -194,11 +194,11 @@ export function AdminPanelV2() {
           </Button>
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[300px,1fr]">
-          <aside className="space-y-6">
+        <div className="grid gap-5 xl:grid-cols-[300px,1fr] xl:gap-6">
+          <aside className="space-y-4 xl:space-y-6">
             <Card className="border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
-              <CardHeader>
-                <CardTitle className="font-serif text-2xl">Полное управление сайтом</CardTitle>
+              <CardHeader className="pb-4">
+                <CardTitle className="font-serif text-xl md:text-2xl">Полное управление сайтом</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-sm text-[#766657]">
                 <p>Здесь можно менять категории, товары, бейджи, все основные изображения и тексты секций.</p>
@@ -209,19 +209,19 @@ export function AdminPanelV2() {
             <div className="grid grid-cols-3 gap-3">
               {stats.map((stat) => (
                 <Card key={stat.label} className="border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
-                  <CardContent className="flex min-h-24 flex-col items-center justify-center p-4 text-center">
+                  <CardContent className="flex min-h-20 flex-col items-center justify-center p-3 text-center md:min-h-24 md:p-4">
                     <p className="text-xs uppercase tracking-[0.18em] text-[#9b8a7a]">{stat.label}</p>
-                    <p className="mt-2 font-serif text-3xl">{stat.value}</p>
+                    <p className="mt-2 font-serif text-2xl md:text-3xl">{stat.value}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
-            <Card className="border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
-              <CardHeader>
+            <Card className="sticky top-20 border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
+              <CardHeader className="pb-4">
                 <CardTitle className="font-serif text-xl">Разделы</CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-2">
+              <CardContent className="grid grid-cols-2 gap-2 xl:grid-cols-1">
                 {adminSections.map((section) => (
                   <SectionButton
                     key={section.id}
@@ -238,8 +238,8 @@ export function AdminPanelV2() {
             {activeSection === "catalog" ? (
               <>
                 <Card className="border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
-                  <CardHeader className="flex flex-row items-center justify-between gap-4">
-                    <CardTitle className="font-serif text-2xl">Категории товаров</CardTitle>
+                  <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <CardTitle className="font-serif text-xl md:text-2xl">Категории товаров</CardTitle>
                     <Button onClick={addCategory} className="bg-[#8b9a7d] hover:bg-[#77876a]">
                       Добавить категорию
                     </Button>
@@ -285,16 +285,16 @@ export function AdminPanelV2() {
                 </Card>
 
                 <Card className="border-[#e0d2bd] bg-[#fcfaf7] shadow-sm">
-                  <CardHeader className="flex flex-row items-center justify-between gap-4">
+                  <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <CardTitle className="font-serif text-2xl">Товары</CardTitle>
+                      <CardTitle className="font-serif text-xl md:text-2xl">Товары</CardTitle>
                       <p className="mt-1 text-sm text-[#8f7c6a]">Создавай товары внутри выбранной категории и управляй их бейджами.</p>
                     </div>
                     <Button onClick={addProduct} className="bg-[#8b9a7d] hover:bg-[#77876a]">
                       Добавить товар
                     </Button>
                   </CardHeader>
-                  <CardContent className="grid gap-6 lg:grid-cols-[360px,1fr]">
+                  <CardContent className="grid gap-5 lg:grid-cols-[360px,1fr] lg:gap-6">
                     <div className="space-y-4">
                       <div className="rounded-3xl border border-[#eadfce] bg-white p-4">
                         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9b8a7a]">Текущая категория</p>
@@ -345,27 +345,27 @@ export function AdminPanelV2() {
                                   selectedProductId === product.id ? "border-[#8b9a7d] bg-[#f2ece2]" : "border-[#ede1d0] bg-[#fcfaf7]"
                                 }`}
                               >
-                                <div className="flex items-start gap-3">
-                                  <button
-                                    type="button"
-                                    onClick={() => setSelectedProductId(product.id)}
-                                    className="flex min-w-0 flex-1 items-start gap-3 text-left"
-                                  >
+                                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+                                    <button
+                                      type="button"
+                                      onClick={() => setSelectedProductId(product.id)}
+                                      className="flex min-w-0 flex-1 items-start gap-3 text-left"
+                                    >
                                     <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-[#f2ece2]">
                                       {product.image ? <img src={product.image} alt={product.name} className="h-full w-full object-cover" /> : null}
                                     </div>
-                                    <div className="min-w-0 flex-1">
-                                      <div className="flex items-start justify-between gap-3">
-                                        <p className="truncate font-medium text-[#3c3027]">{product.name || "Новый товар"}</p>
-                                        <span className="shrink-0 text-sm font-semibold text-[#8b9a7d]">{product.price} BYN</span>
+                                      <div className="min-w-0 flex-1">
+                                        <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+                                          <p className="truncate font-medium text-[#3c3027]">{product.name || "Новый товар"}</p>
+                                          <span className="shrink-0 text-sm font-semibold text-[#8b9a7d]">{product.price} BYN</span>
+                                        </div>
+                                        <p className="mt-1 line-clamp-2 text-sm text-[#8f7c6a]">{product.description || "Без описания"}</p>
                                       </div>
-                                      <p className="mt-1 line-clamp-2 text-sm text-[#8f7c6a]">{product.description || "Без описания"}</p>
-                                    </div>
-                                  </button>
-                                  <div className="flex flex-col gap-2">
-                                    <Button variant="outline" size="sm" onClick={() => setSelectedProductId(product.id)}>
-                                      Изменить
-                                    </Button>
+                                    </button>
+                                    <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-col">
+                                      <Button variant="outline" size="sm" onClick={() => setSelectedProductId(product.id)}>
+                                        Изменить
+                                      </Button>
                                     <Button variant="outline" size="sm" onClick={() => deleteProduct(product.id)}>
                                       Удалить
                                     </Button>
@@ -383,10 +383,10 @@ export function AdminPanelV2() {
                     </div>
 
                     {selectedProduct ? (
-                      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr),280px]">
+                      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr),280px] lg:gap-6">
                         <div className="space-y-4">
-                          <div className="flex items-center justify-between gap-4">
-                            <h3 className="font-serif text-2xl">Редактор товара</h3>
+                          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <h3 className="font-serif text-xl md:text-2xl">Редактор товара</h3>
                             <Button variant="outline" onClick={() => deleteProduct(selectedProduct.id)}>
                               Удалить товар
                             </Button>

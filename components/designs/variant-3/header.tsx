@@ -92,10 +92,10 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
-            <CartSheet triggerClassName="h-10 w-10 rounded-xl px-0" />
+            <CartSheet triggerClassName="h-12 w-12 rounded-2xl px-0 shadow-sm" />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F8F4FC] text-[#6B4C9A]"
+              className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F8F4FC] text-[#6B4C9A] shadow-sm"
             >
               {isMobileMenuOpen ? (
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -81,10 +81,10 @@ export default function CartSheet({
         <button
           className={`relative flex h-11 items-center justify-center rounded-2xl bg-[#F8F4FC] px-4 text-[#6B4C9A] transition-colors hover:bg-[#EDE5F5] ${triggerClassName}`}
         >
-          <ShoppingBag className="h-5 w-5" />
+          <ShoppingBag className="h-5 w-5 sm:h-5 sm:w-5" />
           {showLabel ? <span className="ml-2 text-sm font-medium">Корзина</span> : null}
           {totalItems > 0 ? (
-            <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#9B6DD4] px-1 text-xs font-semibold text-white">
+            <span className="absolute -right-0.5 -top-0.5 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#9B6DD4] px-1.5 text-[11px] font-semibold text-white sm:-right-1 sm:-top-1 sm:h-5 sm:min-w-5 sm:px-1 sm:text-xs">
               {totalItems}
             </span>
           ) : null}
