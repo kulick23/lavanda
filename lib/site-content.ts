@@ -20,7 +20,7 @@ export const defaultSiteContent: SiteContent = {
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-e928af5341da1f5bca6697d057c208ec85b763d3dc8a67d674bda7abce94d534_221c85ee18d-2tXJTLWqw5dYCJ42YZTeLXFBriSSZb.jpg",
       description: "Классический букет из сушеной лаванды для дома, фотозоны или подарка.",
       badge: "Популярное",
-      badgeColor: "bg-[#9B6DD4]",
+      badgeColor: "bg-[#877391]",
       featured: true,
     },
     {
@@ -33,7 +33,7 @@ export const defaultSiteContent: SiteContent = {
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
       description: "Натуральное масло лаванды для аромаламп, ухода и расслабления.",
       badge: "Новинка",
-      badgeColor: "bg-emerald-500",
+      badgeColor: "bg-[#b8c99a]",
       featured: true,
     },
     {
@@ -56,7 +56,7 @@ export const defaultSiteContent: SiteContent = {
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
       description: "Интерьерная композиция для дома, студии или праздничного стола.",
       badge: "Скидка",
-      badgeColor: "bg-amber-500",
+      badgeColor: "bg-[#a88ed2]",
       featured: true,
     },
     {
