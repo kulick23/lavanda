@@ -11,13 +11,13 @@ export default function About() {
     <section id="about" className="bg-white py-16 sm:py-20">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center sm:mb-16">
-          <span className="inline-block px-4 py-1.5 bg-[#F8F4FC] text-[#6B4C9A] text-sm font-medium rounded-full mb-4">
+          <span className="mb-4 inline-block rounded-full bg-[#F8F4FC] px-4 py-1.5 text-[15px] font-medium text-[#6B4C9A] sm:text-sm">
             {about.eyebrow}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2D2A3E] mb-4">
+          <h2 className="mb-4 text-[2.45rem] font-bold text-[#2D2A3E] md:text-4xl">
             {about.title}
           </h2>
-          <p className="text-lg text-[#6B5A7B] max-w-2xl mx-auto">{about.description}</p>
+          <p className="mx-auto max-w-2xl text-xl text-[#6B5A7B] sm:text-lg">{about.description}</p>
         </div>
 
         <div className="mb-16 grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
@@ -38,8 +38,8 @@ export default function About() {
           </div>
 
           <div>
-            <h3 className="mb-5 text-2xl font-bold text-[#2D2A3E]">{about.heading}</h3>
-            <div className="space-y-4 text-[#6B5A7B] leading-relaxed">
+            <h3 className="mb-5 text-[2rem] font-bold text-[#2D2A3E] sm:text-2xl">{about.heading}</h3>
+            <div className="space-y-4 text-lg leading-relaxed text-[#6B5A7B] sm:text-base">
               {about.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
@@ -53,7 +53,7 @@ export default function About() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium text-[#2D2A3E]">{feature.title}</span>
+                  <span className="text-[15px] font-medium text-[#2D2A3E] sm:text-sm">{feature.title}</span>
                 </div>
               ))}
             </div>

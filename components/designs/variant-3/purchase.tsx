@@ -10,10 +10,10 @@ export default function Purchase() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-12 text-center">
-          <span className="inline-block px-4 py-1.5 bg-white text-[#6B4C9A] text-sm font-medium rounded-full mb-4">
+          <span className="mb-4 inline-block rounded-full bg-white px-4 py-1.5 text-[15px] font-medium text-[#6B4C9A] sm:text-sm">
             Как приобрести
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2D2A3E] mb-4">
+          <h2 className="mb-4 text-[2.45rem] font-bold text-[#2D2A3E] md:text-4xl">
             Где{" "}
             <span className="bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">
               купить
@@ -59,14 +59,14 @@ export default function Purchase() {
                 </svg>
               </div>
 
-              <h3 className="text-lg font-bold text-[#2D2A3E] mb-2">{option.title}</h3>
-              <p className="text-sm text-[#6B5A7B] mb-4 leading-relaxed">{option.description}</p>
+              <h3 className="mb-2 text-xl font-bold text-[#2D2A3E] sm:text-lg">{option.title}</h3>
+              <p className="mb-4 text-[15px] leading-relaxed text-[#6B5A7B] sm:text-sm">{option.description}</p>
               
               <a 
                 href={option.link}
                 target={option.link.startsWith("http") ? "_blank" : undefined}
                 rel={option.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-base font-medium transition-all sm:text-sm ${
                   option.highlight 
                     ? "bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] text-white hover:shadow-lg" 
                     : "bg-[#F8F4FC] text-[#6B4C9A] hover:bg-[#EDE5F5]"
@@ -90,8 +90,8 @@ export default function Purchase() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h4 className="font-semibold text-[#2D2A3E] mb-1">Наличный расчёт</h4>
-              <p className="text-sm text-[#6B5A7B]">При самовывозе</p>
+              <h4 className="mb-1 text-[17px] font-semibold text-[#2D2A3E] sm:text-base">Наличный расчёт</h4>
+              <p className="text-[15px] text-[#6B5A7B] sm:text-sm">При самовывозе</p>
             </div>
             <div>
               <div className="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -99,8 +99,8 @@ export default function Purchase() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
               </div>
-              <h4 className="font-semibold text-[#2D2A3E] mb-1">Перевод на карту</h4>
-              <p className="text-sm text-[#6B5A7B]">Предоплата при доставке</p>
+              <h4 className="mb-1 text-[17px] font-semibold text-[#2D2A3E] sm:text-base">Перевод на карту</h4>
+              <p className="text-[15px] text-[#6B5A7B] sm:text-sm">Предоплата при доставке</p>
             </div>
             <div>
               <div className="w-12 h-12 mx-auto mb-3 bg-amber-100 rounded-xl flex items-center justify-center">
@@ -108,8 +108,8 @@ export default function Purchase() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h4 className="font-semibold text-[#2D2A3E] mb-1">Быстрая обработка</h4>
-              <p className="text-sm text-[#6B5A7B]">Ответим в течение дня</p>
+              <h4 className="mb-1 text-[17px] font-semibold text-[#2D2A3E] sm:text-base">Быстрая обработка</h4>
+              <p className="text-[15px] text-[#6B5A7B] sm:text-sm">Ответим в течение дня</p>
             </div>
           </div>
         </div>

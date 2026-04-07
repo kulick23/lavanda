@@ -20,10 +20,10 @@ export default function Hero() {
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm text-[#6B5A7B]">{hero.badge}</span>
+              <span className="text-[15px] text-[#6B5A7B] sm:text-sm">{hero.badge}</span>
             </div>
 
-            <h1 className="mb-5 text-[2.6rem] font-bold leading-[0.95] text-[#2D2A3E] sm:text-5xl lg:text-6xl">
+            <h1 className="mb-5 text-[2.85rem] font-bold leading-[0.95] text-[#2D2A3E] sm:text-5xl lg:text-6xl">
               {hero.titlePrefix}{" "}
               <span className="bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">
                 {hero.titleAccent}
@@ -32,12 +32,12 @@ export default function Hero() {
               {hero.titleSuffix}
             </h1>
 
-            <p className="mb-7 max-w-lg text-base leading-relaxed text-[#6B5A7B] sm:text-lg">{hero.description}</p>
+            <p className="mb-7 max-w-lg text-lg leading-relaxed text-[#6B5A7B] sm:text-lg">{hero.description}</p>
 
             <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
                 href="#catalog"
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-4 text-center font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25 sm:px-8"
+                className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-4 text-center text-base font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25 sm:px-8 sm:text-[15px]"
               >
                 Смотреть ассортимент
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +47,7 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={openBooking}
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-4 text-center font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
+                className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-4 text-center text-base font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25 sm:text-[15px]"
               >
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -60,7 +60,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-              className="mb-10 inline-flex items-center gap-2 text-sm font-medium text-[#6B4C9A] transition-colors hover:text-[#4f3876]"
+              className="mb-10 inline-flex items-center gap-2 text-base font-medium text-[#6B4C9A] transition-colors hover:text-[#4f3876] sm:text-sm"
             >
               О нас
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm">
@@ -73,17 +73,17 @@ export default function Hero() {
             <div className="grid grid-cols-3 gap-3 rounded-[1.75rem] bg-white/70 p-4 shadow-sm backdrop-blur-sm sm:flex sm:gap-8 sm:bg-transparent sm:p-0 sm:shadow-none">
               <div className="text-center">
                 <span className="block text-3xl font-bold bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">100%</span>
-                <span className="text-sm text-[#6B5A7B]">натурально</span>
+                <span className="text-[15px] text-[#6B5A7B] sm:text-sm">натурально</span>
               </div>
               <div className="hidden w-px bg-[#E8E0F0] sm:block" />
               <div className="text-center">
                 <span className="block text-3xl font-bold bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">Своё</span>
-                <span className="text-sm text-[#6B5A7B]">производство</span>
+                <span className="text-[15px] text-[#6B5A7B] sm:text-sm">производство</span>
               </div>
               <div className="hidden w-px bg-[#E8E0F0] sm:block" />
               <div className="text-center">
                 <span className="block text-3xl font-bold bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-transparent">Ручная</span>
-                <span className="text-sm text-[#6B5A7B]">работа</span>
+                <span className="text-[15px] text-[#6B5A7B] sm:text-sm">работа</span>
               </div>
             </div>
           </div>

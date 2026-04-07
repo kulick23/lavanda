@@ -23,13 +23,13 @@ export default function Catalog() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="mb-4 inline-block rounded-full bg-white px-4 py-1.5 text-base font-medium text-[#6f7c52] sm:text-sm">
+          <span className="mb-4 inline-block rounded-full bg-white px-4 py-1.5 text-[15px] font-medium text-[#6f7c52] sm:text-sm">
             Каталог
           </span>
-          <h2 className="mb-4 text-[2.2rem] font-bold text-[#2D2A3E] md:text-4xl">
+          <h2 className="mb-4 text-[2.45rem] font-bold text-[#2D2A3E] md:text-4xl">
             Наши товары
           </h2>
-          <p className="mx-auto max-w-xl text-base text-[#6B5A7B] sm:text-[15px]">
+          <p className="mx-auto max-w-xl text-lg text-[#6B5A7B] sm:text-[15px]">
             Выберите идеальный подарок для себя или близких
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function Catalog() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex items-center gap-2 rounded-full px-4 py-3 text-base font-medium transition-all sm:px-5 sm:py-2.5 sm:text-sm ${
+                className={`flex items-center gap-2 rounded-full px-4 py-3 text-[15px] font-medium transition-all sm:px-5 sm:py-2.5 sm:text-sm ${
                   activeCategory === cat.id
                     ? "bg-[#dfe8bf] text-[#384127] shadow-sm"
                     : "bg-white text-[#6B5A7B] hover:bg-[#ebe3f5]"
@@ -91,13 +91,13 @@ export default function Catalog() {
               <div className="flex flex-1 flex-col p-4 sm:p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <span className="text-xs font-medium text-[#8ca06b]">
+                    <span className="text-sm font-medium text-[#8ca06b] sm:text-xs">
                       {categories.find(c => c.id === product.category)?.label}
                     </span>
-                    <h3 className="mt-1 text-base font-semibold leading-tight text-[#2D2A3E] sm:text-lg">
+                    <h3 className="mt-1 text-lg font-semibold leading-tight text-[#2D2A3E] sm:text-lg">
                       {product.name}
                     </h3>
-                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#6B5A7B]">
+                    <p className="mt-2 line-clamp-3 text-[15px] leading-relaxed text-[#6B5A7B] sm:text-sm">
                       {product.description}
                     </p>
                   </div>
@@ -111,7 +111,7 @@ export default function Catalog() {
                     event.stopPropagation()
                     addItem(product)
                   }}
-                  className="mt-5 flex h-12 w-full items-center justify-center rounded-2xl bg-[#ebe3f5] text-sm font-medium text-[#6B4C9A] transition-all hover:bg-gradient-to-r hover:from-[#877391] hover:to-[#a88ed2] hover:text-white"
+                  className="mt-5 flex h-12 w-full items-center justify-center rounded-2xl bg-[#ebe3f5] text-base font-medium text-[#6B4C9A] transition-all hover:bg-gradient-to-r hover:from-[#877391] hover:to-[#a88ed2] hover:text-white sm:text-sm"
                 >
                   В корзину
                 </button>

@@ -63,13 +63,13 @@ export default function Contact() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="mb-12 text-center">
-            <span className="inline-block px-4 py-1.5 bg-[#F8F4FC] text-[#6B4C9A] text-sm font-medium rounded-full mb-4">
+            <span className="mb-4 inline-block rounded-full bg-[#F8F4FC] px-4 py-1.5 text-[15px] font-medium text-[#6B4C9A] sm:text-sm">
               Контакты
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2D2A3E] mb-4">
+            <h2 className="mb-4 text-[2.45rem] font-bold text-[#2D2A3E] md:text-4xl">
               Свяжитесь с нами
             </h2>
-            <p className="text-[#6B5A7B]">
+            <p className="text-lg text-[#6B5A7B] sm:text-base">
               Отправьте заявку с сайта или сразу напишите в удобный мессенджер.
             </p>
           </div>
@@ -86,8 +86,8 @@ export default function Contact() {
                   <TelegramIcon className="h-6 w-6 text-[#6B4C9A] group-hover:text-white" />
                 </div>
                 <div className="min-w-0">
-                  <span className="block text-base font-semibold text-[#2D2A3E]">{settings.telegram.label}</span>
-                  <span className="block truncate text-sm text-[#6B4C9A]">{settings.telegram.value}</span>
+                  <span className="block text-lg font-semibold text-[#2D2A3E] sm:text-base">{settings.telegram.label}</span>
+                  <span className="block truncate text-[15px] text-[#6B4C9A] sm:text-sm">{settings.telegram.value}</span>
                 </div>
               </a>
 
@@ -99,8 +99,8 @@ export default function Contact() {
                   <ViberIcon className="h-6 w-6 text-[#6B4C9A] group-hover:text-white" />
                 </div>
                 <div className="min-w-0">
-                  <span className="block text-base font-semibold text-[#2D2A3E]">{settings.viber.label}</span>
-                  <span className="block truncate text-sm text-[#6B4C9A]">{settings.viber.value}</span>
+                  <span className="block text-lg font-semibold text-[#2D2A3E] sm:text-base">{settings.viber.label}</span>
+                  <span className="block truncate text-[15px] text-[#6B4C9A] sm:text-sm">{settings.viber.value}</span>
                 </div>
               </a>
 
@@ -112,17 +112,17 @@ export default function Contact() {
               >
                 <InstagramIcon className="h-7 w-7 shrink-0" />
                 <div className="min-w-0">
-                  <span className="block text-base font-semibold">{settings.instagram.label}</span>
-                  <span className="block truncate text-sm text-white/80">{settings.instagram.value}</span>
+                  <span className="block text-lg font-semibold sm:text-base">{settings.instagram.label}</span>
+                  <span className="block truncate text-[15px] text-white/80 sm:text-sm">{settings.instagram.value}</span>
                 </div>
               </a>
 
               <div className="rounded-[1.5rem] border border-[#E8E0F0] p-5 sm:rounded-[1.75rem]">
-                <p className="text-sm text-[#6B5A7B]">Телефон</p>
+                <p className="text-[15px] text-[#6B5A7B] sm:text-sm">Телефон</p>
                 <p className="mt-1 font-semibold text-[#2D2A3E]">{settings.phone}</p>
-                <p className="mt-4 text-sm text-[#6B5A7B]">Часы работы</p>
+                <p className="mt-4 text-[15px] text-[#6B5A7B] sm:text-sm">Часы работы</p>
                 <p className="mt-1 font-semibold text-[#2D2A3E]">{settings.workingHours}</p>
-                <p className="mt-4 text-sm text-[#6B5A7B]">Локация</p>
+                <p className="mt-4 text-[15px] text-[#6B5A7B] sm:text-sm">Локация</p>
                 <p className="mt-1 font-semibold text-[#2D2A3E]">{settings.location}</p>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-sm font-medium text-[#2D2A3E] mb-2">Ваше имя</label>
+                      <label className="mb-2 block text-[15px] font-medium text-[#2D2A3E] sm:text-sm">Ваше имя</label>
                       <input
                         type="text"
                         required
@@ -143,7 +143,7 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-[#2D2A3E] mb-2">Телефон</label>
+                      <label className="mb-2 block text-[15px] font-medium text-[#2D2A3E] sm:text-sm">Телефон</label>
                       <input
                         type="tel"
                         required
@@ -156,7 +156,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#2D2A3E] mb-3">Удобный мессенджер</label>
+                    <label className="mb-3 block text-[15px] font-medium text-[#2D2A3E] sm:text-sm">Удобный мессенджер</label>
                     <div className="grid gap-3">
                       {(["telegram", "viber"] as Messenger[]).map((messenger) => (
                         <label
@@ -185,7 +185,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#2D2A3E] mb-2">Сообщение</label>
+                    <label className="mb-2 block text-[15px] font-medium text-[#2D2A3E] sm:text-sm">Сообщение</label>
                     <textarea
                       required
                       rows={5}
@@ -199,7 +199,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 font-semibold text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
+                    className="flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 text-base font-semibold text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25 sm:text-[15px]"
                   >
                     {isSubmitting ? "Отправляем..." : "Отправить"}
                   </button>
