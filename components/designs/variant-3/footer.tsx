@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 import { InstagramIcon, TelegramIcon, ViberIcon } from "@/components/brand-icons"
 import { useSiteContent } from "@/components/site-content-provider"
 
@@ -89,8 +90,15 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-white/10 text-center text-white/40 text-sm">
+        <div className="mt-12 flex items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/40">
           <p>&copy; 2024 Lavanda. Все права защищены.</p>
+          <Link
+            href="/admin/login"
+            className="inline-flex h-7 items-center justify-center rounded-full px-3 text-[11px] uppercase tracking-[0.22em] text-white/20 transition-colors hover:text-white/45"
+            aria-label="Вход в админ-панель"
+          >
+            admin
+          </Link>
         </div>
       </div>
     </footer>
