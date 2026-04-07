@@ -46,14 +46,14 @@ export default function Header() {
           {/* Logo */}
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex min-w-0 items-center gap-2"
+            className="flex min-w-0 flex-1 items-center gap-2 pr-2"
           >
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#9B6DD4] to-[#6B4C9A]">
               <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 3v18M12 3c-2 4-5 6-5 10a5 5 0 0010 0c0-4-3-6-5-10z" />
               </svg>
             </div>
-            <span className="truncate bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-lg font-bold text-transparent sm:text-xl">
+            <span className="max-w-[11.5rem] whitespace-normal break-words bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] bg-clip-text text-[1.05rem] font-bold leading-[1.02] text-transparent sm:max-w-none sm:text-xl">
               {settings.brandName}
             </span>
           </button>
@@ -91,7 +91,7 @@ export default function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="shrink-0 flex items-center gap-2 lg:hidden">
             <CartSheet triggerClassName="h-12 w-12 rounded-2xl px-0 shadow-sm" />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

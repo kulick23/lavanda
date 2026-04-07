@@ -34,7 +34,7 @@ export default function Hero() {
 
             <p className="mb-7 max-w-lg text-base leading-relaxed text-[#6B5A7B] sm:text-lg">{hero.description}</p>
 
-            <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
                 href="#catalog"
                 className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-4 text-center font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25 sm:px-8"
@@ -56,6 +56,19 @@ export default function Hero() {
                 Посетить поле
               </button>
             </div>
+
+            <button
+              type="button"
+              onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+              className="mb-10 inline-flex items-center gap-2 text-sm font-medium text-[#6B4C9A] transition-colors hover:text-[#4f3876]"
+            >
+              О нас
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14m0 0l-6-6m6 6l6-6" />
+                </svg>
+              </span>
+            </button>
 
             <div className="grid grid-cols-3 gap-3 rounded-[1.75rem] bg-white/70 p-4 shadow-sm backdrop-blur-sm sm:flex sm:gap-8 sm:bg-transparent sm:p-0 sm:shadow-none">
               <div className="text-center">
