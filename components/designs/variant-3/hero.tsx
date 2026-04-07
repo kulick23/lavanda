@@ -47,7 +47,7 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={openBooking}
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl border border-[#E8E0F0] bg-white px-6 py-4 text-center font-medium text-[#6B4C9A] transition-all hover:border-[#9B6DD4]"
+                className="inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-6 py-4 text-center font-medium text-white transition-all hover:shadow-xl hover:shadow-[#9B6DD4]/25"
               >
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
