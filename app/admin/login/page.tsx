@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { getSupabaseClient } from "@/lib/supabase-browser"
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [formData, setFormData] = useState({ login: "", password: "" })
+  const [formData, setFormData] = useState({ email: "", password: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
 
@@ -15,22 +16,16 @@ export default function AdminLoginPage() {
     setError("")
 
     try {
-      const response = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      const { error: signInError } = await getSupabaseClient().auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
       })
 
-      const payload = (await response.json()) as { ok: boolean; error?: string }
-
-      if (!response.ok || !payload.ok) {
-        throw new Error(payload.error || "Не удалось войти.")
+      if (signInError) {
+        throw new Error("Неверный email или пароль.")
       }
 
-      router.push("/admin")
-      router.refresh()
+      router.push("/admin/")
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Не удалось войти.")
     } finally {
@@ -44,17 +39,17 @@ export default function AdminLoginPage() {
         <p className="text-sm font-medium uppercase tracking-[0.22em] text-[#9b8a7a]">Lavanda Admin</p>
         <h1 className="mt-4 font-serif text-4xl text-[#3c3027]">Вход в админку</h1>
         <p className="mt-3 text-sm leading-relaxed text-[#766657]">
-          Введите логин и пароль администратора. Без авторизации раздел редактирования недоступен.
+          Введите email и пароль администратора. Без авторизации раздел редактирования недоступен.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <div>
-            <label className="mb-2 block text-sm font-medium text-[#3c3027]">Логин</label>
+            <label className="mb-2 block text-sm font-medium text-[#3c3027]">Email</label>
             <input
-              type="text"
+              type="email"
               autoComplete="username"
-              value={formData.login}
-              onChange={(event) => setFormData((current) => ({ ...current, login: event.target.value }))}
+              value={formData.email}
+              onChange={(event) => setFormData((current) => ({ ...current, email: event.target.value }))}
               className="lav-input"
               required
             />
@@ -86,4 +81,3 @@ export default function AdminLoginPage() {
     </main>
   )
 }
-

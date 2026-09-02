@@ -17,7 +17,7 @@ export const defaultSiteContent: SiteContent = {
       category: "bouquets",
       price: 25,
       image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-e928af5341da1f5bca6697d057c208ec85b763d3dc8a67d674bda7abce94d534_221c85ee18d-2tXJTLWqw5dYCJ42YZTeLXFBriSSZb.jpg",
+        "/images/lavender-2.jpg",
       description: "Классический букет из сушеной лаванды для дома, фотозоны или подарка.",
       badge: "Популярное",
       badgeColor: "bg-[#877391]",
@@ -30,7 +30,7 @@ export const defaultSiteContent: SiteContent = {
       category: "oils",
       price: 35,
       image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
+        "/images/lavender-3.jpg",
       description: "Натуральное масло лаванды для аромаламп, ухода и расслабления.",
       badge: "Новинка",
       badgeColor: "bg-[#b8c99a]",
@@ -43,7 +43,7 @@ export const defaultSiteContent: SiteContent = {
       category: "sachets",
       price: 12,
       image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-e928af5341da1f5bca6697d057c208ec85b763d3dc8a67d674bda7abce94d534_221c85ee18d-2tXJTLWqw5dYCJ42YZTeLXFBriSSZb.jpg",
+        "/images/lavender-2.jpg",
       description: "Ароматическое саше ручной работы для шкафа, спальни или автомобиля.",
     },
     {
@@ -53,7 +53,7 @@ export const defaultSiteContent: SiteContent = {
       category: "compositions",
       price: 45,
       image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
+        "/images/lavender-3.jpg",
       description: "Интерьерная композиция для дома, студии или праздничного стола.",
       badge: "Скидка",
       badgeColor: "bg-[#a88ed2]",
@@ -66,7 +66,7 @@ export const defaultSiteContent: SiteContent = {
       category: "soap",
       price: 18,
       image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-e928af5341da1f5bca6697d057c208ec85b763d3dc8a67d674bda7abce94d534_221c85ee18d-2tXJTLWqw5dYCJ42YZTeLXFBriSSZb.jpg",
+        "/images/lavender-2.jpg",
       description: "Натуральное мыло с лавандой и мягким травяным ароматом.",
     },
   ],
@@ -99,7 +99,7 @@ export const defaultSiteContent: SiteContent = {
     description:
       "Мы сами выращиваем лаванду и создаём из неё уникальную продукцию. Букеты, масла, саше и многое другое - всё сделано с душой и заботой.",
     image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-0151bcceeda9718b06d0cefc898c9bf9949462ac9b5a8d4e7b8f2322ef36bc8e_221c853d5e8-9U2rchNej6JLgNy59D1BVBxDwrXdKS.jpg",
+      "/images/lavender-1.jpg",
     floatingCardLeftTitle: "Своё поле",
     floatingCardLeftText: "Выращиваем сами",
     floatingCardRightTitle: "С любовью",
@@ -112,15 +112,15 @@ export const defaultSiteContent: SiteContent = {
       "Мы - семейное хозяйство, которое с любовью выращивает лаванду и создаёт натуральную продукцию",
     gallery: [
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
+        src: "/images/lavender-3.jpg",
         alt: "Сбор лаванды",
       },
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-e928af5341da1f5bca6697d057c208ec85b763d3dc8a67d674bda7abce94d534_221c85ee18d-2tXJTLWqw5dYCJ42YZTeLXFBriSSZb.jpg",
+        src: "/images/lavender-2.jpg",
         alt: "Букеты лаванды",
       },
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-0151bcceeda9718b06d0cefc898c9bf9949462ac9b5a8d4e7b8f2322ef36bc8e_221c853d5e8-9U2rchNej6JLgNy59D1BVBxDwrXdKS.jpg",
+        src: "/images/lavender-1.jpg",
         alt: "Владельцы фермы",
       },
     ],
@@ -164,7 +164,7 @@ export const defaultSiteContent: SiteContent = {
       },
     ],
     bannerImage:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
+      "/images/lavender-3.jpg",
     bannerTitle: "Каждый букет - частичка нашего поля",
     bannerText:
       "Мы вкладываем душу в каждое изделие, чтобы вы могли наслаждаться натуральным ароматом лаванды у себя дома",
@@ -175,15 +175,15 @@ export const defaultSiteContent: SiteContent = {
     description: "Приглашаем вас на прогулку по цветущему лавандовому полю летом",
     gallery: [
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-0151bcceeda9718b06d0cefc898c9bf9949462ac9b5a8d4e7b8f2322ef36bc8e_221c853d5e8-9U2rchNej6JLgNy59D1BVBxDwrXdKS.jpg",
+        src: "/images/lavender-1.jpg",
         alt: "Посетители на лавандовом поле",
       },
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-f0426741ea676b616fb3261ea871279d1dce2eab99a20245309b300c98f5d907_221c856dacf-NPmU5P5rUdgTxYrHVHFXBlF6GmJJb2.jpg",
+        src: "/images/lavender-3.jpg",
         alt: "Сбор лаванды",
       },
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0-02-05-e928af5341da1f5bca6697d057c208ec85b763d3dc8a67d674bda7abce94d534_221c85ee18d-2tXJTLWqw5dYCJ42YZTeLXFBriSSZb.jpg",
+        src: "/images/lavender-2.jpg",
         alt: "Букеты лаванды",
       },
     ],

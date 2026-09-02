@@ -1,37 +1,13 @@
 import { defaultSiteContent } from "@/lib/site-content"
 import type { SiteContent } from "@/lib/types"
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase-browser"
 
 const SITE_CONTENT_ROW = "main"
-const CONTENT_TABLE = process.env.SUPABASE_CONTENT_TABLE || "site_content"
-const STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || "site-assets"
-
-function getSupabaseConfig() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-  if (!url || !serviceRoleKey) {
-    return null
-  }
-
-  return { url, serviceRoleKey }
-}
-
-function getHeaders(contentType = "application/json") {
-  const config = getSupabaseConfig()
-
-  if (!config) {
-    throw new Error("Supabase env vars are not configured.")
-  }
-
-  return {
-    apikey: config.serviceRoleKey,
-    Authorization: `Bearer ${config.serviceRoleKey}`,
-    "Content-Type": contentType,
-  }
-}
+const CONTENT_TABLE = process.env.NEXT_PUBLIC_SUPABASE_CONTENT_TABLE || "site_content"
+const STORAGE_BUCKET = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "site-assets"
 
 export function isRemoteContentEnabled() {
-  return Boolean(getSupabaseConfig())
+  return isSupabaseConfigured()
 }
 
 function isSiteContentLike(value: unknown): value is SiteContent {
@@ -51,49 +27,35 @@ function isSiteContentLike(value: unknown): value is SiteContent {
 }
 
 export async function readSiteContent() {
-  const config = getSupabaseConfig()
-
-  if (!config) {
+  if (!isSupabaseConfigured()) {
     return defaultSiteContent
   }
 
-  const response = await fetch(
-    `${config.url}/rest/v1/${CONTENT_TABLE}?select=data&slug=eq.${SITE_CONTENT_ROW}&limit=1`,
-    {
-      headers: getHeaders(),
-      cache: "no-store",
-    },
-  )
+  const { data, error } = await getSupabaseClient()
+    .from(CONTENT_TABLE)
+    .select("data")
+    .eq("slug", SITE_CONTENT_ROW)
+    .limit(1)
+    .maybeSingle()
 
-  if (!response.ok) {
+  if (error) {
     throw new Error("Failed to fetch site content from Supabase.")
   }
 
-  const rows = (await response.json()) as Array<{ data?: unknown }>
-  return isSiteContentLike(rows[0]?.data) ? rows[0].data : defaultSiteContent
+  return isSiteContentLike(data?.data) ? data.data : defaultSiteContent
 }
 
 export async function writeSiteContent(content: SiteContent) {
-  const config = getSupabaseConfig()
-
-  if (!config) {
+  if (!isSupabaseConfigured()) {
     return content
   }
 
-  const response = await fetch(
-    `${config.url}/rest/v1/${CONTENT_TABLE}?on_conflict=slug`,
-    {
-      method: "POST",
-      headers: {
-        ...getHeaders(),
-        Prefer: "resolution=merge-duplicates,return=representation",
-      },
-      body: JSON.stringify([{ slug: SITE_CONTENT_ROW, data: content }]),
-    },
-  )
+  const { error } = await getSupabaseClient()
+    .from(CONTENT_TABLE)
+    .upsert({ slug: SITE_CONTENT_ROW, data: content }, { onConflict: "slug" })
 
-  if (!response.ok) {
-    throw new Error("Failed to save site content to Supabase.")
+  if (error) {
+    throw new Error("Не удалось сохранить контент. Проверьте, что вы вошли в админку.")
   }
 
   return content
@@ -104,28 +66,23 @@ function sanitizeFilename(filename: string) {
 }
 
 export async function uploadSiteImage(file: File) {
-  const config = getSupabaseConfig()
-
-  if (!config) {
+  if (!isSupabaseConfigured()) {
     throw new Error("Supabase env vars are not configured.")
   }
 
+  const supabase = getSupabaseClient()
   const fileName = `${Date.now()}-${sanitizeFilename(file.name || "image")}`
   const filePath = `uploads/${fileName}`
-  const body = Buffer.from(await file.arrayBuffer())
 
-  const response = await fetch(`${config.url}/storage/v1/object/${STORAGE_BUCKET}/${filePath}`, {
-    method: "POST",
-    headers: {
-      ...getHeaders(file.type || "application/octet-stream"),
-      "x-upsert": "true",
-    },
-    body,
+  // Имя файла уникально (таймстамп), а upsert требует дополнительных
+  // RLS-политик (select/delete) на storage.objects — поэтому без него.
+  const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(filePath, file, {
+    contentType: file.type || "application/octet-stream",
   })
 
-  if (!response.ok) {
+  if (error) {
     throw new Error("Failed to upload image to Supabase Storage.")
   }
 
-  return `${config.url}/storage/v1/object/public/${STORAGE_BUCKET}/${filePath}`
+  return supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath).data.publicUrl
 }

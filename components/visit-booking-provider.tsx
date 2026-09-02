@@ -52,7 +52,7 @@ export function VisitBookingProvider({ children }: { children: React.ReactNode }
     setSubmitError("")
 
     try {
-      const response = await fetch("/api/inquiries", {
+      const response = await fetch("/send.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { useSiteContent } from "@/components/site-content-provider"
+import { uploadSiteImage } from "@/lib/site-content-store"
 import type { Category, Product, SiteContent } from "@/lib/types"
 
 const adminSections = [
@@ -675,21 +676,8 @@ function ImageField({
     setUploadError("")
 
     try {
-      const formData = new FormData()
-      formData.append("file", file)
-
-      const response = await fetch("/api/admin/upload", {
-        method: "POST",
-        body: formData,
-      })
-
-      const payload = (await response.json()) as { ok: boolean; url?: string; error?: string }
-
-      if (!response.ok || !payload.ok || !payload.url) {
-        throw new Error(payload.error || "Не удалось загрузить изображение.")
-      }
-
-      onChange(payload.url)
+      const url = await uploadSiteImage(file)
+      onChange(url)
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : "Не удалось загрузить изображение.")
     } finally {

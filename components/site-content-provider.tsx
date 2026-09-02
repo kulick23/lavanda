@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 import type { SiteContent } from "@/lib/types"
+import { isRemoteContentEnabled, readSiteContent, writeSiteContent } from "@/lib/site-content-store"
 
 const STORAGE_KEY = "lavanda-site-content"
 
@@ -25,14 +26,36 @@ export function SiteContentProvider({
   const initialSnapshot = JSON.stringify(initialContent)
   const [content, setContent] = useState<SiteContent>(initialContent)
   const [lastSavedSnapshot, setLastSavedSnapshot] = useState(initialSnapshot)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(isRemoteContentEnabled())
   const [isSaving, setIsSaving] = useState(false)
   const [saveError, setSaveError] = useState("")
 
   useEffect(() => {
-    setContent(initialContent)
-    setLastSavedSnapshot(JSON.stringify(initialContent))
-  }, [initialContent])
+    if (!isRemoteContentEnabled()) {
+      return
+    }
+
+    let cancelled = false
+
+    readSiteContent()
+      .then((remoteContent) => {
+        if (cancelled) return
+        setContent(remoteContent)
+        setLastSavedSnapshot(JSON.stringify(remoteContent))
+      })
+      .catch(() => {
+        // Supabase недоступен — сайт продолжает работать на контенте по умолчанию.
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setIsLoading(false)
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     if (isLoading) {
@@ -47,18 +70,7 @@ export function SiteContentProvider({
     setSaveError("")
 
     try {
-      const response = await fetch("/api/admin/content", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ content }),
-      })
-
-      if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as { error?: string } | null
-        throw new Error(payload?.error || "Не удалось сохранить контент.")
-      }
+      await writeSiteContent(content)
 
       const snapshot = JSON.stringify(content)
       setLastSavedSnapshot(snapshot)

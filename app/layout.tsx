@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { CartProvider } from '@/components/cart-provider'
-import { Analytics } from '@vercel/analytics/next'
 import { SiteContentProvider } from '@/components/site-content-provider'
 import { VisitBookingProvider } from '@/components/visit-booking-provider'
-import { readSiteContent } from '@/lib/site-content-store'
+import { defaultSiteContent } from '@/lib/site-content'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({ 
@@ -41,22 +40,19 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const initialContent = await readSiteContent()
-
   return (
     <html lang="ru">
       <body className={`${cormorant.variable} ${inter.variable} font-sans antialiased`}>
-        <SiteContentProvider initialContent={initialContent}>
+        <SiteContentProvider initialContent={defaultSiteContent}>
           <CartProvider>
             <VisitBookingProvider>{children}</VisitBookingProvider>
           </CartProvider>
         </SiteContentProvider>
-        <Analytics />
       </body>
     </html>
   )

@@ -1,16 +1,54 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { AdminPanelV2 } from "@/components/admin/variant-2/admin-panel"
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase-browser"
 
 export default function AdminPage() {
   const router = useRouter()
+  const [isAuthorized, setIsAuthorized] = useState(false)
+
+  useEffect(() => {
+    if (!isSupabaseConfigured()) {
+      router.replace("/admin/login/")
+      return
+    }
+
+    const supabase = getSupabaseClient()
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        setIsAuthorized(true)
+      } else {
+        router.replace("/admin/login/")
+      }
+    })
+
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        setIsAuthorized(false)
+        router.replace("/admin/login/")
+      }
+    })
+
+    return () => {
+      subscription.subscription.unsubscribe()
+    }
+  }, [router])
 
   const handleLogout = async () => {
-    await fetch("/api/admin/logout", { method: "POST" })
-    router.push("/admin/login")
-    router.refresh()
+    await getSupabaseClient().auth.signOut()
+    router.push("/admin/login/")
+  }
+
+  if (!isAuthorized) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#f6f1ea]">
+        <p className="text-sm text-[#766657]">Проверяем доступ...</p>
+      </main>
+    )
   }
 
   return (
