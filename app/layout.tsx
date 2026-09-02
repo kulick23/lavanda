@@ -18,25 +18,25 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Лаванда | Магазин лавандовых букетов и композиций',
-  description: 'Натуральная лаванда из Прованса. Букеты, композиции, эфирные масла и саше ручной работы.',
-  generator: 'v0.app',
+  metadataBase: new URL('https://lavandabel.by'),
+  title: 'Лавандовое поле «Блакітны сад» — лаванда из Беларуси',
+  description:
+    'Натуральная лаванда, выращенная на собственном поле в Беларуси. Букеты, композиции и саше ручной работы. Посещение лавандового поля, доставка по Беларуси.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Лавандовое поле «Блакітны сад» — лаванда из Беларуси',
+    description:
+      'Натуральная лаванда с собственного поля в Беларуси. Букеты, композиции и саше ручной работы.',
+    url: 'https://lavandabel.by/',
+    siteName: 'Лавандовое поле «Блакітны сад»',
+    locale: 'ru_RU',
+    type: 'website',
+    images: [{ url: '/images/lavender-2.jpg', width: 1600, height: 1067 }],
+  },
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
   },
 }
 
