@@ -47,6 +47,9 @@ export default function Footer() {
               <button onClick={() => scrollToSection("purchase")} className="block text-white/60 hover:text-white transition-colors">
                 Где купить
               </button>
+              <button onClick={() => scrollToSection("delivery")} className="block text-white/60 hover:text-white transition-colors">
+                Доставка и оплата
+              </button>
               <button onClick={() => scrollToSection("visit")} className="block text-white/60 hover:text-white transition-colors">
                 Посетить поле
               </button>
@@ -89,9 +92,26 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Реквизиты — обязательные сведения (Закон РБ о торговле, требования банка для эквайринга) */}
+        <div className="mt-12 border-t border-white/10 pt-8 text-sm leading-relaxed text-white/40">
+          <p className="font-medium text-white/60">Крестьянское (фермерское) хозяйство «Лавандовая ферма»</p>
+          <p>
+            Зарегистрировано Вилейским районным исполнительным комитетом 24.07.2026, УНП 691195419
+          </p>
+          <p>
+            Юридический адрес: Республика Беларусь, Минская область, Вилейский район, Вязынский сельсовет,
+            д. Дуровичи, ул. Полевая, дом 1а
+          </p>
+          <p>
+            Тел.: <a href="tel:+375336586058" className="hover:text-white/70">+375 33 658 60 58</a> · E-mail:{" "}
+            <a href="mailto:blakitnysad@gmail.com" className="hover:text-white/70">blakitnysad@gmail.com</a> ·{" "}
+            {settings.workingHours}
+          </p>
+        </div>
+
         {/* Copyright */}
-        <div className="mt-12 flex items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/40">
-          <p>&copy; 2024 Lavanda. Все права защищены.</p>
+        <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/40">
+          <p>&copy; 2026 КФХ «Лавандовая ферма». Все права защищены.</p>
           <Link
             href="/admin/login"
             className="inline-flex h-7 items-center justify-center rounded-full px-3 text-[11px] uppercase tracking-[0.22em] text-white/20 transition-colors hover:text-white/45"
