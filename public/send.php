@@ -27,6 +27,7 @@ if (!empty($in['website'])) {
 $type      = ($in['type'] ?? '') === 'order' ? 'order' : 'contact';
 $name      = trim(mb_substr((string)($in['customerName'] ?? ''), 0, 100));
 $phone     = trim(mb_substr((string)($in['phone'] ?? ''), 0, 30));
+$email     = trim(mb_substr((string)($in['email'] ?? ''), 0, 120));
 $messenger = in_array($in['messenger'] ?? '', ['telegram', 'viber'], true) ? $in['messenger'] : '';
 $product   = trim(mb_substr((string)($in['productName'] ?? ''), 0, 200));
 $comment   = trim(mb_substr((string)($in['comment'] ?? ''), 0, 2000));
@@ -43,6 +44,9 @@ $lines = [
     "Телефон: {$phone}",
     "Мессенджер: {$messenger}",
 ];
+if ($email !== '') {
+    $lines[] = "E-mail: {$email}";
+}
 if ($product !== '') {
     $lines[] = "Товар: {$product}";
 }

@@ -36,10 +36,34 @@ export default function Delivery() {
         <div className="mx-auto mt-10 max-w-5xl space-y-6 text-[#5A5568]">
           <div className="rounded-3xl border border-[#EDE7F6] bg-[#FAFAFA] p-6">
             <h3 className="mb-3 font-semibold text-lg text-[#2D2A3E]">Оплата</h3>
-            <p className="leading-relaxed">
-              Способ оплаты согласовывается при подтверждении заказа: наличными или банковской картой при
-              получении, либо переводом по реквизитам. Цены на сайте указаны в белорусских рублях.
-            </p>
+            <div className="grid gap-6 md:grid-cols-[1fr,280px] md:items-start">
+              <div className="space-y-4">
+                <p className="leading-relaxed">
+                  Оплата осуществляется банковской картой онлайн через систему электронных платежей bePaid. После
+                  подтверждения заказа продавец отправляет покупателю ссылку на защищённую платёжную страницу.
+                </p>
+                <p className="leading-relaxed">
+                  Также возможна оплата наличными при получении заказа. Покупателю выдаётся кассовый чек. Цены на
+                  сайте указаны в белорусских рублях.
+                </p>
+              </div>
+
+              <a
+                href="/cash-receipt-sample.png"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block overflow-hidden rounded-2xl border border-[#EDE7F6] bg-white p-3 transition-shadow hover:shadow-md"
+              >
+                <img
+                  src="/cash-receipt-sample.png"
+                  alt="Образец кассового чека при оплате наличными"
+                  className="h-auto w-full rounded-xl object-contain"
+                />
+                <span className="mt-3 block text-center text-sm font-medium text-[#6B4C9A]">
+                  Образец кассового чека
+                </span>
+              </a>
+            </div>
           </div>
 
           <div className="rounded-3xl border border-[#EDE7F6] bg-[#FAFAFA] p-6">
@@ -51,6 +75,11 @@ export default function Delivery() {
               № 778 (в том числе растения и парфюмерно-косметические товары). Товар ненадлежащего качества
               подлежит возврату или обмену в соответствии с Законом Республики Беларусь «О защите прав
               потребителей». Для оформления возврата свяжитесь с нами по телефону или в мессенджерах.
+            </p>
+            <p className="mt-4 leading-relaxed">
+              Если товар был оплачен банковской картой через сайт, возврат осуществляется на карту, с которой была
+              произведена оплата. Срок поступления денежных средств на карту — от 1 до 30 дней с момента
+              осуществления возврата Продавцом.
             </p>
           </div>
         </div>

@@ -18,9 +18,9 @@ export default function Header() {
   }, [])
 
   const navItems = [
+    { id: "catalog", label: "Ассортимент" },
     { id: "about", label: "О нас" },
     { id: "production", label: "Производство" },
-    { id: "catalog", label: "Ассортимент" },
     { id: "purchase", label: "Где купить" },
     { id: "visit", label: "Посетить поле" },
     { id: "contact", label: "Контакты" },

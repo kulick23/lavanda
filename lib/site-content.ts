@@ -71,7 +71,7 @@ export const defaultSiteContent: SiteContent = {
     },
   ],
   settings: {
-    brandName: "Lavanda",
+    brandName: "Лавандовое поле «Блакітны сад»",
     telegram: {
       label: "Telegram",
       href: "https://t.me/lavanda_shop",

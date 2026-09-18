@@ -98,6 +98,7 @@ export default function Footer() {
           <p>
             Зарегистрировано Вилейским районным исполнительным комитетом 24.07.2026, УНП 691195419
           </p>
+          <p>Регистрация в Торговом реестре № 784957 от 10.09.2026</p>
           <p>
             Юридический адрес: Республика Беларусь, Минская область, Вилейский район, Вязынский сельсовет,
             д. Дуровичи, ул. Полевая, дом 1а
@@ -107,6 +108,14 @@ export default function Footer() {
             <a href="mailto:blakitnysad@gmail.com" className="hover:text-white/70">blakitnysad@gmail.com</a> ·{" "}
             {settings.workingHours}
           </p>
+        </div>
+
+        <div className="mt-6 rounded-2xl bg-white p-4">
+          <img
+            src="/payment-systems.png"
+            alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт ИнтернетПароль, bePaid"
+            className="mx-auto h-auto max-w-full object-contain"
+          />
         </div>
 
         {/* Copyright */}

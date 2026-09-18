@@ -25,6 +25,7 @@ export default function CartSheet({
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    email: "",
     messenger: "telegram",
     comment: "",
   })
@@ -55,6 +56,7 @@ export default function CartSheet({
           type: "order",
           customerName: formData.name,
           phone: formData.phone,
+          email: formData.email,
           messenger: formData.messenger,
           productName: `Корзина (${items.length})`,
           comment: `${orderSummary}\n\nКомментарий клиента: ${formData.comment || "Нет"}`,
@@ -181,6 +183,17 @@ export default function CartSheet({
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="lav-input"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="mb-2 block text-sm font-medium text-[#2D2A3E]">E-mail для оплаты</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="lav-input"
+                      placeholder="name@example.com"
                     />
                   </div>
                 </div>

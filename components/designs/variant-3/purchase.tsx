@@ -81,35 +81,79 @@ export default function Purchase() {
           ))}
         </div>
 
-        {/* Additional Info */}
-        <div className="mx-auto mt-10 max-w-4xl rounded-3xl bg-white p-6 md:p-8">
-          <div className="grid gap-6 text-center sm:grid-cols-3">
+        {/* Payment Info */}
+        <div className="mx-auto mt-10 max-w-4xl rounded-3xl bg-white p-6 shadow-sm md:p-8">
+          <div className="grid gap-8 lg:grid-cols-[1fr,1.1fr] lg:items-start">
             <div>
-              <div className="w-12 h-12 mx-auto mb-3 bg-green-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+              <span className="inline-flex rounded-full bg-[#f4f7ea] px-3 py-1 text-sm font-medium text-[#6f7c52]">
+                Оплата
+              </span>
+              <h3 className="mt-4 text-2xl font-bold text-[#2D2A3E]">
+                Банковской картой онлайн
+              </h3>
+              <p className="mt-3 text-[16px] leading-relaxed text-[#6B5A7B]">
+                После оформления заявки менеджер подтверждает наличие, состав заказа, доставку и отправляет ссылку
+                для оплаты через защищённую платёжную страницу bePaid.
+              </p>
+              <div className="mt-5 rounded-2xl border border-[#e8eadf] bg-[#fbfcf6] p-4">
+                <img
+                  src="/payment-systems.png"
+                  alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт ИнтернетПароль, bePaid"
+                  className="h-auto w-full object-contain"
+                />
               </div>
-              <h4 className="mb-1 text-[17px] font-semibold text-[#2D2A3E] sm:text-base">Наличный расчёт</h4>
-              <p className="text-[15px] text-[#6B5A7B] sm:text-sm">При самовывозе</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#8a7a96]">
+                Карточные данные вводятся только на стороне bePaid и не сохраняются на сайте.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-[#6B5A7B]">
+                Платежи по банковским картам осуществляются через систему электронных платежей{" "}
+                <a
+                  href="https://bepaid.by/kak-oplatit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-[#6B4C9A] underline decoration-[#9B6DD4]/40 underline-offset-4 hover:text-[#9B6DD4]"
+                >
+                  bePaid
+                </a>
+                . Платежная страница bePaid отвечает всем требованиям безопасности передачи данных (PCI DSS Level
+                1). Все конфиденциальные данные хранятся в зашифрованном виде и максимально устойчивы к взлому.
+                Доступ к авторизационным страницам осуществляется с использованием протокола, обеспечивающего
+                безопасную передачу данных в Интернете (SSL/TLS).
+              </p>
             </div>
-            <div>
-              <div className="w-12 h-12 mx-auto mb-3 bg-blue-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
+
+            <div className="space-y-5">
+              <div>
+                <h4 className="text-lg font-semibold text-[#2D2A3E]">Порядок оформления заказа</h4>
+                <ol className="mt-3 space-y-2 text-[15px] leading-relaxed text-[#6B5A7B]">
+                  <li>1. Добавьте товары в корзину и проверьте количество.</li>
+                  <li>2. Укажите имя, телефон, удобный мессенджер и комментарий.</li>
+                  <li>3. Мы свяжемся с вами, подтвердим заказ, стоимость и способ получения.</li>
+                  <li>4. После подтверждения отправим ссылку для онлайн-оплаты картой.</li>
+                </ol>
               </div>
-              <h4 className="mb-1 text-[17px] font-semibold text-[#2D2A3E] sm:text-base">Перевод на карту</h4>
-              <p className="text-[15px] text-[#6B5A7B] sm:text-sm">Предоплата при доставке</p>
-            </div>
-            <div>
-              <div className="w-12 h-12 mx-auto mb-3 bg-amber-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl bg-[#F8F4FC] p-4">
+                  <h4 className="font-semibold text-[#2D2A3E]">Доставка</h4>
+                  <p className="mt-2 text-[15px] leading-relaxed text-[#6B5A7B]">
+                    По Беларуси Белпочтой или курьерской службой. Срок доставки - от 5 дней.
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-[#f4f7ea] p-4">
+                  <h4 className="font-semibold text-[#2D2A3E]">Возврат</h4>
+                  <p className="mt-2 text-[15px] leading-relaxed text-[#6B5A7B]">
+                    Если товар был оплачен банковской картой через сайт, возврат осуществляется на карту, с которой
+                    была произведена оплата. Срок поступления денежных средств на карту — от 1 до 30 дней с момента
+                    осуществления возврата Продавцом.
+                  </p>
+                </div>
               </div>
-              <h4 className="mb-1 text-[17px] font-semibold text-[#2D2A3E] sm:text-base">Быстрая обработка</h4>
-              <p className="text-[15px] text-[#6B5A7B] sm:text-sm">Ответим в течение дня</p>
+
+              <div className="rounded-2xl border border-[#F0E8F5] p-4 text-[15px] leading-relaxed text-[#6B5A7B]">
+                Мы принимаем платежи по картам Visa, Visa Electron, MasterCard, Maestro и Белкарт.
+                Платежи проходят через систему электронных платежей bePaid.
+              </div>
             </div>
           </div>
         </div>
