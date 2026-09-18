@@ -36,33 +36,29 @@ export default function Delivery() {
         <div className="mx-auto mt-10 max-w-5xl space-y-6 text-[#5A5568]">
           <div className="rounded-3xl border border-[#EDE7F6] bg-[#FAFAFA] p-6">
             <h3 className="mb-3 font-semibold text-lg text-[#2D2A3E]">Оплата</h3>
-            <div className="grid gap-6 md:grid-cols-[1fr,280px] md:items-start">
-              <div className="space-y-4">
-                <p className="leading-relaxed">
-                  Оплата осуществляется банковской картой онлайн через систему электронных платежей bePaid. После
-                  подтверждения заказа продавец отправляет покупателю ссылку на защищённую платёжную страницу.
-                </p>
-                <p className="leading-relaxed">
-                  Также возможна оплата наличными при получении заказа. Покупателю выдаётся кассовый чек. Цены на
-                  сайте указаны в белорусских рублях.
-                </p>
-              </div>
-
+            <div className="space-y-4">
+              <p className="leading-relaxed">
+                Оплата осуществляется банковской картой онлайн через систему электронных платежей bePaid. После
+                подтверждения заказа продавец отправляет покупателю ссылку на защищённую платёжную страницу.
+              </p>
+              <p className="leading-relaxed">
+                Также возможна оплата наличными при получении заказа. Покупателю выдаётся кассовый чек. Цены на
+                сайте указаны в белорусских рублях.
+              </p>
+              <div>
               <a
                 href="/cash-receipt-sample.png"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block overflow-hidden rounded-2xl border border-[#EDE7F6] bg-white p-3 transition-shadow hover:shadow-md"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-5 py-3 text-sm font-medium text-white transition-shadow hover:shadow-lg sm:w-auto"
               >
-                <img
-                  src="/cash-receipt-sample.png"
-                  alt="Образец кассового чека при оплате наличными"
-                  className="h-auto w-full rounded-xl object-contain"
-                />
-                <span className="mt-3 block text-center text-sm font-medium text-[#6B4C9A]">
-                  Образец кассового чека
-                </span>
+                Посмотреть образец кассового чека
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5h5m0 0v5m0-5L10 14" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5" />
+                </svg>
               </a>
+              </div>
             </div>
           </div>
 
