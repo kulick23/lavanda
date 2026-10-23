@@ -47,7 +47,7 @@ export default function Delivery() {
               </p>
               <div>
               <a
-                href="/cash-receipt-sample.png"
+                href="/cash-receipt-sample.jpg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#9B6DD4] to-[#6B4C9A] px-5 py-3 text-sm font-medium text-white transition-shadow hover:shadow-lg sm:w-auto"
